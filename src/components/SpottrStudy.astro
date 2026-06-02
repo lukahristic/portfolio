@@ -1,0 +1,137 @@
+---
+---
+<section id="spottr" class="bg-paper border-t border-paper-dark">
+  <div class="max-w-4xl mx-auto px-6 py-24">
+
+    <!-- Header -->
+    <div class="flex items-center gap-4 mb-16">
+      <p class="font-body text-sm text-ink-muted uppercase tracking-widest">Case Study 01</p>
+      <span class="flex-1 border-t border-paper-dark"></span>
+      <span class="font-body text-xs text-accent uppercase tracking-wider">Product Thinking</span>
+    </div>
+
+    <h2 class="font-display text-5xl md:text-6xl font-light text-ink mb-4" style="line-height: var(--leading-tight);">
+      Spottr
+    </h2>
+    <p class="font-display text-2xl font-light text-ink-muted mb-20" style="font-style: italic;">
+      A gym app that gets out of its own way.
+    </p>
+
+    <!-- Problem -->
+    <div class="mb-20">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">The problem</p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        You just joined a gym. You want to get stronger but you don't really know what you're doing.
+        There's someone across the floor who clearly does. You could ask — but you don't.
+        They look busy. They might be annoyed. You don't want to be <em>that person</em>.
+      </p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        They see you too. They'd actually enjoy helping. But they don't want to walk up
+        uninvited and give advice nobody asked for. So nothing happens.
+      </p>
+
+      <blockquote
+        class="border-l-2 border-accent pl-6 my-10"
+        style="border-left-color: var(--color-accent);"
+      >
+        <p class="font-display text-2xl font-light text-ink" style="font-style: italic; line-height: var(--leading-snug);">
+          "Both sides want to connect. Neither side moves. That's the gym intimidation deadlock."
+        </p>
+      </blockquote>
+
+      <p class="font-body text-lg text-ink" style="line-height: var(--leading-loose);">
+        Most "gym buddy" apps try to solve this with profiles and matching —
+        a dating-app model transplanted to the gym floor. That's the wrong diagnosis.
+        The problem isn't discovery. It's <strong>permission</strong>.
+      </p>
+    </div>
+
+    <!-- Insight -->
+    <div class="mb-20 bg-paper-mid border border-paper-dark rounded-lg p-8 md:p-12">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">The insight</p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        People need a signal that the other person is actually there, actually open,
+        and actually expecting contact. Context does the permission work — not profiles.
+      </p>
+
+      <p class="font-body text-lg text-ink" style="line-height: var(--leading-loose);">
+        Spottr's solution: <strong>geolocation-gated live presence</strong> + <strong>chat-first contact</strong>.
+        You only appear as "live" when you're physically checked in at the gym.
+        Contact happens through the app — no approaching in person unless both people agree.
+        The shared location and shared moment eliminate the awkwardness before it starts.
+      </p>
+    </div>
+
+    <!-- Design override moment -->
+    <div class="mb-20">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">The decision that mattered most</p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        The first design that came back was black-and-white, high-contrast, premium-feeling.
+        Clean lines. Dark mode. The kind of thing that looks impressive in a Dribbble screenshot.
+      </p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        I rejected it.
+      </p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        Not because it was bad design. Because it was <em>wrong</em> design.
+        The product's entire reason to exist is reducing gym intimidation —
+        and the design was intimidating. The aesthetic contradicted the soul of the app.
+      </p>
+
+      <p class="font-body text-lg text-ink mb-10" style="line-height: var(--leading-loose);">
+        I gave the AI a new brief: warm, friendly, approachable — the antithesis
+        of the "serious gym" look. It generated a warm light palette. That's the version that shipped.
+      </p>
+
+      <div class="border border-accent-faint bg-accent-faint rounded-lg px-6 py-4">
+        <p class="font-body text-sm text-ink" style="line-height: var(--leading-normal);">
+          <strong>The lesson isn't about taste.</strong>
+          It's about knowing what the thing is <em>for</em> — and overriding the output when it misses that.
+          That's not a technical skill. That's judgment.
+        </p>
+      </div>
+    </div>
+
+    <!-- Build -->
+    <div class="mb-20">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">How it was built</p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        Built in plan mode. Every feature started as a written brief — what it should do,
+        what it shouldn't do, what decisions I was making and why.
+        I read the Supabase and Expo documentation before implementing, not after things broke.
+        Prompts were engineered like contractor briefs: specific, constrained, with explicit constraints.
+      </p>
+
+      <p class="font-body text-lg text-ink" style="line-height: var(--leading-loose);">
+        The AI handled execution. I handled direction.
+      </p>
+    </div>
+
+    <!-- Stack + status -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-8 border-t border-paper-dark">
+      <div>
+        <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">Stack</p>
+        <div class="flex flex-wrap gap-2">
+          {["React Native", "Expo", "Supabase"].map((tech) => (
+            <span class="font-body text-xs text-ink-muted border border-paper-dark px-2 py-1 rounded">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div class="text-right">
+        <span class="font-body text-xs text-accent uppercase tracking-wider bg-accent-faint px-3 py-1 rounded-full">
+          Launching — story grows here
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>

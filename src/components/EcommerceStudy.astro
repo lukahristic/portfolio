@@ -1,0 +1,76 @@
+---
+const signals = [
+  { label: "Auth & authorization", detail: "Users, roles, protected routes — not tutorial-level auth, but a real access model." },
+  { label: "Docker Postgres", detail: "Local dev isolated in a container. No more 'works on my machine' database drift." },
+  { label: "TypeScript throughout", detail: "The type system as a forcing function for clarity, not an afterthought." },
+  { label: "Vercel deploy pipeline", detail: "A working CI path from commit to live — because shipping is the point." },
+];
+---
+
+<section id="ecommerce" class="bg-paper-mid border-t border-paper-dark">
+  <div class="max-w-4xl mx-auto px-6 py-24">
+
+    <!-- Header -->
+    <div class="flex items-center gap-4 mb-16">
+      <p class="font-body text-sm text-ink-muted uppercase tracking-widest">Case Study 02</p>
+      <span class="flex-1 border-t border-paper-dark"></span>
+      <span class="font-body text-xs text-ink-muted uppercase tracking-wider">Technical Credibility</span>
+    </div>
+
+    <h2 class="font-display text-5xl md:text-6xl font-light text-ink mb-4" style="line-height: var(--leading-tight);">
+      Ecommerce Platform
+    </h2>
+    <p class="font-display text-2xl font-light text-ink-muted mb-20" style="font-style: italic;">
+      Built to prove I understand how real apps are assembled.
+    </p>
+
+    <!-- Honest framing -->
+    <div class="mb-16">
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        This project isn't a product. Nobody's buying anything through it.
+        It exists to answer one question any technical screener will have:
+        can I understand how a real application is assembled and shipped?
+      </p>
+
+      <p class="font-body text-lg text-ink" style="line-height: var(--leading-loose);">
+        The answer is: yes — and here's the architecture. Auth, a proper local dev setup,
+        typed code end-to-end, and a real deploy pipeline. Not a tutorial-follow.
+        A deliberate exercise in assembling things correctly.
+      </p>
+    </div>
+
+    <!-- Engineering signals -->
+    <div class="mb-16">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-8">What's in it</p>
+
+      <div class="grid gap-px bg-paper-dark border border-paper-dark rounded-lg overflow-hidden">
+        {signals.map((s) => (
+          <div class="bg-paper-mid p-6">
+            <p class="font-body text-sm font-semibold text-ink mb-1">{s.label}</p>
+            <p class="font-body text-sm text-ink-muted" style="line-height: var(--leading-normal);">{s.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Stack + status -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-8 border-t border-paper-dark">
+      <div>
+        <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">Stack</p>
+        <div class="flex flex-wrap gap-2">
+          {["TypeScript", "Next.js", "Docker", "Postgres", "Vercel"].map((tech) => (
+            <span class="font-body text-xs text-ink-muted border border-paper-dark px-2 py-1 rounded">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div>
+        <span class="font-body text-xs text-ink-muted uppercase tracking-wider bg-paper-dark px-3 py-1 rounded-full">
+          Shipped
+        </span>
+      </div>
+    </div>
+
+  </div>
+</section>

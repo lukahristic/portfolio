@@ -1,0 +1,71 @@
+---
+const projects = [
+  {
+    index: "01",
+    name: "Spottr",
+    description: "Gym community app that removes the intimidation barrier between gym-goers.",
+    stack: ["React Native", "Expo", "Supabase"],
+    status: "Launching",
+    statusStyle: "accent",
+    href: "#spottr",
+  },
+  {
+    index: "02",
+    name: "Ecommerce Platform",
+    description: "Full-stack web application with auth, a real database, and a working deploy pipeline.",
+    stack: ["TypeScript", "Next.js", "Docker", "Vercel"],
+    status: "Shipped",
+    statusStyle: "muted",
+    href: "#ecommerce",
+  },
+];
+---
+
+<section id="proof" class="bg-paper-mid border-t border-paper-dark">
+  <div class="max-w-4xl mx-auto px-6 py-24">
+
+    <p class="font-body text-sm text-ink-muted uppercase tracking-widest mb-12">
+      Work
+    </p>
+
+    <div class="grid md:grid-cols-2 gap-px bg-paper-dark">
+      {projects.map((p) => (
+        <a
+          href={p.href}
+          class="group bg-paper-mid p-8 hover:bg-paper transition-colors"
+        >
+          <div class="flex items-start justify-between mb-6">
+            <span class="font-body text-xs text-ink-faint">{p.index}</span>
+            <span
+              class:list={[
+                "font-body text-xs uppercase tracking-wider px-2 py-0.5 rounded-full",
+                p.statusStyle === "accent"
+                  ? "bg-accent-faint text-accent"
+                  : "bg-paper-dark text-ink-muted",
+              ]}
+            >
+              {p.status}
+            </span>
+          </div>
+
+          <h2 class="font-display text-3xl font-medium text-ink mb-3 group-hover:text-accent transition-colors">
+            {p.name}
+          </h2>
+
+          <p class="font-body text-base text-ink-muted mb-6" style="line-height: var(--leading-normal);">
+            {p.description}
+          </p>
+
+          <div class="flex flex-wrap gap-2">
+            {p.stack.map((tech) => (
+              <span class="font-body text-xs text-ink-muted border border-paper-dark px-2 py-0.5 rounded">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+
+  </div>
+</section>

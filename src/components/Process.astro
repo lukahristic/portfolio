@@ -1,0 +1,72 @@
+---
+const steps = [
+  {
+    number: "01",
+    title: "Plan before code",
+    body: "Every project starts with a document. Not code — a plan. What am I building, what decisions am I making, what don't I know yet. Plan mode forces the thinking before anything is written.",
+  },
+  {
+    number: "02",
+    title: "Read the docs first",
+    body: "I read the actual documentation before implementing, not after things break. It's slower upfront and faster overall. It also produces decisions I can explain.",
+  },
+  {
+    number: "03",
+    title: "Engineer the prompts",
+    body: "I write prompts the way I'd write a brief for a contractor: specific about the goal, explicit about constraints, clear about what to avoid. Vague prompts produce vague results — that's a me problem, not an AI problem.",
+  },
+  {
+    number: "04",
+    title: "Direct, don't defer",
+    body: "The AI does execution. I do direction. When the output misses the brief, I don't adjust to fit it — I correct it and explain why. That's the skill.",
+  },
+];
+---
+
+<section id="process" class="bg-paper border-t border-paper-dark">
+  <div class="max-w-4xl mx-auto px-6 py-24">
+
+    <div class="flex items-center gap-4 mb-16">
+      <p class="font-body text-sm text-ink-muted uppercase tracking-widest">How I work</p>
+      <span class="flex-1 border-t border-paper-dark"></span>
+    </div>
+
+    <h2 class="font-display text-4xl md:text-5xl font-light text-ink mb-6" style="line-height: var(--leading-tight);">
+      The method is the thing.
+    </h2>
+    <p class="font-body text-lg text-ink-muted mb-20" style="max-width: 52ch; line-height: var(--leading-normal);">
+      Most people using AI tools don't talk about how. I do — because how is
+      what separates building deliberately from building by accident.
+    </p>
+
+    <!-- Steps -->
+    <div class="space-y-0 mb-20">
+      {steps.map((step, i) => (
+        <div class:list={["flex gap-8 py-10", i < steps.length - 1 ? "border-b border-paper-dark" : ""]}>
+          <span class="font-body text-xs text-ink-faint pt-1 shrink-0 w-6">{step.number}</span>
+          <div>
+            <h3 class="font-display text-xl font-medium text-ink mb-3">{step.title}</h3>
+            <p class="font-body text-base text-ink-muted" style="line-height: var(--leading-loose);">{step.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Signature: medium = message -->
+    <div class="bg-paper-mid border border-paper-dark rounded-lg p-8 md:p-10">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-4">
+        A note about this site
+      </p>
+      <p class="font-display text-2xl font-light text-ink mb-4" style="line-height: var(--leading-snug);">
+        This portfolio was built the same way.
+      </p>
+      <p class="font-body text-base text-ink-muted" style="line-height: var(--leading-loose); max-width: 58ch;">
+        Astro was chosen because it ships zero JavaScript by default — right tool for a content site,
+        not because it was the familiar one. The design tokens were locked before the first page was written.
+        The copy was drafted before the code. The decisions are logged in a decision log.
+        I'm not hiding any of that. It's the point.
+      </p>
+    </div>
+
+  </div>
+</section>

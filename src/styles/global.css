@@ -1,0 +1,97 @@
+/* ─── Google Fonts ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap');
+
+@import "tailwindcss";
+
+/* ─── Design Tokens ─────────────────────────────────────────────────────────── */
+@theme {
+  /* Color — house palette */
+  --color-paper:        #FAF7F2;   /* warm off-white base */
+  --color-paper-mid:    #F0E9DE;   /* slightly deeper, for section alternation */
+  --color-paper-dark:   #E5DAC8;   /* borders, dividers, subtle depth */
+  --color-ink:          #1F1A14;   /* warm near-black body text */
+  --color-ink-muted:    #6B5E4E;   /* secondary text, captions */
+  --color-ink-faint:    #A89880;   /* placeholder, disabled */
+  --color-accent:       #C05C2C;   /* terracotta — the signature accent */
+  --color-accent-warm:  #E07848;   /* accent hover / lighter variant */
+  --color-accent-faint: #F2DDD1;   /* accent tint for backgrounds */
+
+  /* Typography — font families */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-mono:    ui-monospace, 'Cascadia Code', monospace;
+
+  /* Typography — scale (fluid-friendly base) */
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+  --text-5xl:  3rem;
+  --text-6xl:  3.75rem;
+  --text-7xl:  4.5rem;
+
+  /* Spacing rhythm */
+  --spacing-section: 6rem;
+
+  /* Line heights */
+  --leading-tight:  1.2;
+  --leading-snug:   1.35;
+  --leading-normal: 1.6;
+  --leading-loose:  1.8;
+}
+
+/* ─── Base styles ───────────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: var(--leading-normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    color: var(--color-ink);
+  }
+
+  p {
+    max-width: 68ch;
+  }
+
+  a {
+    color: inherit;
+    text-decoration-color: var(--color-accent);
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
