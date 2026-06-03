@@ -21,8 +21,115 @@ const {
     <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    {/* Set the JS flag before paint so the hidden reveal state never flashes for no-JS users. */}
+    <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
   <body>
     <slot />
+
+    <script>
+      // The page's only motion JS: smooth scroll (Lenis) + reveal-on-scroll.
+      // Bundled + deferred by Astro.
+      import Lenis from 'lenis';
+
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const coarse = window.matchMedia('(pointer: coarse)').matches; // touch devices
+      const NAV_OFFSET = 80; // px — matches scroll-margin-top: 5rem under the fixed nav
+
+      // ── Smooth scroll ─────────────────────────────────────────────────────────
+      // Off for reduced-motion and touch: native momentum scroll wins on phones.
+      let lenis: Lenis | null = null;
+      if (!reduce && !coarse) {
+        lenis = new Lenis({
+          lerp: 0.1,           // calm glide — "expensive magazine", not ice rink
+          smoothWheel: true,
+        });
+        const raf = (time: number) => {
+          lenis!.raf(time);
+          requestAnimationFrame(raf);
+        };
+        requestAnimationFrame(raf);
+      }
+
+      // ── Anchor links ──────────────────────────────────────────────────────────
+      // Route hash links through Lenis (with nav offset); fall back to native.
+      document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+        a.addEventListener('click', (e) => {
+          const hash = a.getAttribute('href');
+          if (!hash || hash === '#') return;
+          const target = document.querySelector<HTMLElement>(hash);
+          if (!target) return;
+          e.preventDefault();
+          if (lenis) {
+            lenis.scrollTo(target, { offset: -NAV_OFFSET, duration: 1.2 });
+          } else {
+            target.scrollIntoView({ behavior: 'smooth' }); // uses scroll-margin-top
+          }
+          history.pushState(null, '', hash);
+        });
+      });
+
+      // ── Reveal-on-scroll ──────────────────────────────────────────────────────
+      // Reveal-once, reading-friendly (never re-hides on scroll-up).
+      const els = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+        );
+        els.forEach((el) => io.observe(el));
+      }
+
+      // ── Before / after wipe ───────────────────────────────────────────────────
+      // Upgrade to the pinned wipe unless reduced-motion (then it stays side-by-side).
+      // Reveal-once when the frame is well into view.
+      const baFigs = document.querySelectorAll<HTMLElement>('[data-ba]');
+      if (!reduce && baFigs.length) {
+        baFigs.forEach((f) => f.classList.add('ba--wipe'));
+        if ('IntersectionObserver' in window) {
+          const baIo = new IntersectionObserver(
+            (entries) => {
+              for (const entry of entries) {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-ba-revealed');
+                  baIo.unobserve(entry.target);
+                }
+              }
+            },
+            { threshold: 0.4 }
+          );
+          baFigs.forEach((f) => baIo.observe(f));
+        } else {
+          baFigs.forEach((f) => f.classList.add('is-ba-revealed'));
+        }
+      }
+
+      // ── Spottr chapter marker ─────────────────────────────────────────────────
+      // Scrollspy: update the sticky running head to the current case-study beat.
+      const beatLabel = document.querySelector<HTMLElement>('[data-beat-label]');
+      const beats = document.querySelectorAll<HTMLElement>('[data-beat]');
+      if (beatLabel && beats.length && 'IntersectionObserver' in window) {
+        const beatIo = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (entry.isIntersecting) {
+                beatLabel.textContent = (entry.target as HTMLElement).dataset.beat ?? '';
+              }
+            }
+          },
+          { rootMargin: '-30% 0px -60% 0px', threshold: 0 }
+        );
+        beats.forEach((b) => beatIo.observe(b));
+      }
+    </script>
   </body>
 </html>

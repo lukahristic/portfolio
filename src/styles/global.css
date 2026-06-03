@@ -42,6 +42,13 @@
   --leading-snug:   1.35;
   --leading-normal: 1.6;
   --leading-loose:  1.8;
+
+  /* Motion — the house language (locked before anything animates) */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);  /* confident settle, no bounce */
+  --dur-reveal:    680ms;   /* element entrances */
+  --dur-micro:     220ms;   /* hovers, links */
+  --reveal-shift:  16px;    /* entrance travel — deliberately small */
+  --stagger:       90ms;    /* gap between siblings in a group */
 }
 
 /* ─── Base styles ───────────────────────────────────────────────────────────── */
@@ -58,12 +65,19 @@
     line-height: var(--leading-normal);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
+    /* No global smooth-scroll: it animated the initial hash jump (e.g. #contact)
+       on load before Lenis was ready. Smooth scrolling is handled by Lenis on
+       desktop and scrollIntoView({behavior:'smooth'}) on the touch/no-JS path. */
   }
 
   body {
     margin: 0;
     min-height: 100vh;
+  }
+
+  /* Anchored sections clear the fixed nav (h-16 = 4rem) when scrolled to. */
+  section[id] {
+    scroll-margin-top: 5rem;
   }
 
   h1, h2, h3, h4 {
@@ -92,6 +106,276 @@
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ─── Lenis smooth scroll ───────────────────────────────────────────────────── */
+/* Only active when html.lenis is present (JS, non-touch, motion allowed). When
+   absent, native CSS scroll-behavior: smooth handles anchors as the fallback. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ─── Before / after comparison ─────────────────────────────────────────────── */
+/* Default = side-by-side (robust, no-JS / reduced-motion safe).
+   JS adds .ba--wipe to upgrade into the pinned before→after wipe. */
+@layer base {
+  .ba {
+    position: relative;
+    margin: 3rem 0;
+  }
+
+  .ba__frame {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .ba__layer {
+    width: 45%;
+    max-width: 220px;
+    height: auto;
+    display: block;
+    border-radius: 1.25rem;
+    border: 1px solid var(--color-paper-dark);
+    box-shadow: 0 14px 36px -16px rgba(31, 26, 20, 0.3);
+  }
+
+  .ba__handle { display: none; }
+
+  .ba__caption {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 0.85rem 0 0;
+  }
+
+  .ba__tag {
+    flex: 0 0 45%;
+    max-width: 220px;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-ink-faint);
+  }
+  .ba__tag--after { color: var(--color-accent); }
+
+  /* ── Wipe mode (JS-enhanced) ── */
+  .ba--wipe .ba__frame {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin-inline: auto;
+    aspect-ratio: 922 / 2049;
+    border-radius: 1.75rem;
+    overflow: hidden;
+    border: 1px solid var(--color-paper-dark);
+    box-shadow: 0 30px 70px -24px rgba(31, 26, 20, 0.4);
+  }
+
+  .ba--wipe .ba__layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    object-fit: cover;
+  }
+
+  .ba--wipe .ba__before { z-index: 1; }
+
+  .ba--wipe .ba__after {
+    z-index: 2;
+    clip-path: inset(0 100% 0 0);          /* start hidden — only the dark "before" shows */
+    transition: clip-path 1.5s var(--ease-out-soft);
+    will-change: clip-path;
+  }
+  .ba--wipe.is-ba-revealed .ba__after {
+    clip-path: inset(0 0 0 0);             /* wipe the warm "after" in, left → right */
+  }
+
+  .ba--wipe .ba__handle {
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    background: var(--color-accent);
+    box-shadow: 0 0 12px 1px var(--color-accent-warm);
+    z-index: 3;
+    transition: left 1.5s var(--ease-out-soft);
+  }
+  .ba--wipe.is-ba-revealed .ba__handle {
+    left: 100%;                            /* rides the wipe edge to the far side */
+  }
+
+  .ba--wipe .ba__caption {
+    justify-content: center;
+    gap: 0.6rem;
+  }
+  .ba--wipe .ba__tag {
+    flex: 0 0 auto;
+    max-width: none;
+  }
+  .ba--wipe .ba__tag--before::after {
+    content: '\2192';                      /* → */
+    margin-left: 0.6rem;
+    color: var(--color-ink-faint);
+  }
+
+  /* Reduced motion: stay side-by-side, no wipe (JS won't add .ba--wipe anyway). */
+  @media (prefers-reduced-motion: reduce) {
+    .ba--wipe .ba__after { clip-path: none; transition: none; }
+  }
+}
+
+/* ─── Parallax depth ────────────────────────────────────────────────────────── */
+/* Decorative, non-text layers only. Native scroll-driven (compositor, no JS).
+   Runs only on precise pointers with motion allowed; otherwise sits static.
+   Displacement budget ≈ 12vh. */
+@layer base {
+  /* Hero: a soft terracotta wash drifting behind the headline. */
+  .hero-depth {
+    position: absolute;
+    z-index: 0;
+    top: -12%;
+    right: -8%;
+    width: 70vw;
+    max-width: 720px;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, var(--color-accent-faint) 0%, transparent 68%);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* Spottr: a ghosted quotation glyph drifting behind the pull-quote. */
+  .quote-wrap {
+    position: relative;
+    /* overflow: hidden removed — it was clipping the glyph's ink. */
+  }
+  .quote-wrap__mark {
+    position: absolute;
+    top: -2rem;
+    right: -0.5rem;        /* right side — clears the left accent rule */
+    z-index: 0;
+    font-family: var(--font-display);
+    font-size: clamp(6rem, 18vw, 12rem);
+    line-height: 0.8;
+    color: var(--color-accent);
+    opacity: 0.3;
+    pointer-events: none;
+    user-select: none;
+  }
+  .quote-wrap > blockquote {
+    position: relative;
+    z-index: 1;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+      .hero-depth {
+        animation: hero-drift linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 0 110vh;
+      }
+      .quote-wrap__mark {
+        animation: quote-drift linear both;
+        animation-timeline: view();
+        animation-range: cover;
+      }
+    }
+  }
+
+  @keyframes hero-drift {
+    to { transform: translateY(12vh); }
+  }
+  @keyframes quote-drift {
+    from { transform: translateY(-5vh); }
+    to   { transform: translateY(5vh); }
+  }
+}
+
+/* ─── Spottr sticky chapter marker ──────────────────────────────────────────── */
+@layer base {
+  .spottr-marker {
+    position: sticky;
+    top: 5rem;                             /* clears the fixed nav */
+    z-index: 10;
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    margin-bottom: 2.5rem;
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    background: var(--color-paper);        /* content scrolls cleanly beneath */
+    border-bottom: 1px solid var(--color-paper-dark);
+  }
+  .spottr-marker__study { color: var(--color-ink-faint); }
+  .spottr-marker__beat {
+    color: var(--color-accent);
+    transition: opacity var(--dur-micro) var(--ease-out-soft);
+  }
+}
+
+/* ─── Scroll reveals ────────────────────────────────────────────────────────── */
+/* Progressive enhancement: hidden state applies ONLY when JS is confirmed present
+   (html.js is set synchronously in <head>). No-JS users see everything immediately.
+   Reveal-once via IntersectionObserver — reading-friendly, never re-hides on scroll-up.
+   Animates transform + opacity only (compositor-friendly). */
+@layer base {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(var(--reveal-shift));
+    transition: opacity var(--dur-reveal) var(--ease-out-soft),
+                transform var(--dur-reveal) var(--ease-out-soft);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+  }
+
+  /* Stagger within a group — see --stagger token */
+  [data-reveal-delay="1"] { --reveal-delay: calc(var(--stagger) * 1); }
+  [data-reveal-delay="2"] { --reveal-delay: calc(var(--stagger) * 2); }
+  [data-reveal-delay="3"] { --reveal-delay: calc(var(--stagger) * 3); }
+  [data-reveal-delay="4"] { --reveal-delay: calc(var(--stagger) * 4); }
+
+  /* Reduced motion: no hidden state, no travel — content is just there. */
+  @media (prefers-reduced-motion: reduce) {
+    .js [data-reveal] {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      will-change: auto;
     }
   }
 }

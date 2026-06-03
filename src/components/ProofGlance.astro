@@ -24,14 +24,16 @@ const projects = [
 <section id="proof" class="bg-paper-mid border-t border-paper-dark">
   <div class="max-w-4xl mx-auto px-6 py-24">
 
-    <p class="font-body text-sm text-ink-muted uppercase tracking-widest mb-12">
+    <p data-reveal class="font-body text-sm text-ink-muted uppercase tracking-widest mb-12">
       Work
     </p>
 
     <div class="grid md:grid-cols-2 gap-px bg-paper-dark">
-      {projects.map((p) => (
+      {projects.map((p, i) => (
         <a
           href={p.href}
+          data-reveal
+          data-reveal-delay={i + 1}
           class="group bg-paper-mid p-8 hover:bg-paper transition-colors"
         >
           <div class="flex items-start justify-between mb-6">

@@ -1,47 +1,68 @@
 ---
+import BeforeAfter from './BeforeAfter.astro';
+import heroOld from '../assets/spottr/hero-old.jpg';
+import heroNew from '../assets/spottr/hero-new.jpg';
+import onboardingOld from '../assets/spottr/onboarding-old.jpg';
+import onboardingNew from '../assets/spottr/onboarding-new.jpg';
 ---
-<section id="spottr" class="bg-paper border-t border-paper-dark">
+{/* Spottr's "room": the shipped app's amber accent is scoped locally here,
+    leaving the portfolio's terracotta as the house accent everywhere else. */}
+<section
+  id="spottr"
+  class="bg-paper border-t border-paper-dark"
+  style="--color-accent: #D9A53B; --color-accent-warm: #E8C06A; --color-accent-faint: #F6EBD0;"
+>
   <div class="max-w-4xl mx-auto px-6 py-24">
 
     <!-- Header -->
-    <div class="flex items-center gap-4 mb-16">
+    <div data-reveal class="flex items-center gap-4 mb-16">
       <p class="font-body text-sm text-ink-muted uppercase tracking-widest">Case Study 01</p>
       <span class="flex-1 border-t border-paper-dark"></span>
       <span class="font-body text-xs text-accent uppercase tracking-wider">Product Thinking</span>
     </div>
 
-    <h2 class="font-display text-5xl md:text-6xl font-light text-ink mb-4" style="line-height: var(--leading-tight);">
+    <h2 data-reveal class="font-display text-5xl md:text-6xl font-light text-ink mb-4" style="line-height: var(--leading-tight);">
       Spottr
     </h2>
-    <p class="font-display text-2xl font-light text-ink-muted mb-20" style="font-style: italic;">
+    <p data-reveal data-reveal-delay="1" class="font-display text-2xl font-light text-ink-muted mb-12" style="font-style: italic;">
       A gym app that gets out of its own way.
     </p>
 
-    <!-- Problem -->
-    <div class="mb-20">
-      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">The problem</p>
+    <!-- Sticky running head — pins below the title and tracks the current beat -->
+    <div class="spottr-marker" aria-hidden="true">
+      <span class="spottr-marker__study">01 — Spottr</span>
+      <span class="spottr-marker__beat" data-beat-label>The problem</span>
+    </div>
 
-      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+    <!-- Problem -->
+    <div data-beat="The problem" class="mb-20">
+      <p data-reveal class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">The problem</p>
+
+      <p data-reveal class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
         You just joined a gym. You want to get stronger but you don't really know what you're doing.
         There's someone across the floor who clearly does. You could ask — but you don't.
         They look busy. They might be annoyed. You don't want to be <em>that person</em>.
       </p>
 
-      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+      <p data-reveal class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
         They see you too. They'd actually enjoy helping. But they don't want to walk up
         uninvited and give advice nobody asked for. So nothing happens.
       </p>
 
-      <blockquote
-        class="border-l-2 border-accent pl-6 my-10"
-        style="border-left-color: var(--color-accent);"
-      >
-        <p class="font-display text-2xl font-light text-ink" style="font-style: italic; line-height: var(--leading-snug);">
-          "Both sides want to connect. Neither side moves. That's the gym intimidation deadlock."
-        </p>
-      </blockquote>
+      <div class="quote-wrap my-10">
+        <span class="quote-wrap__mark" aria-hidden="true">&rdquo;</span>
+        <blockquote
+          data-reveal data-reveal-delay="1"
+          class="border-l-2 border-accent pl-6"
+          style="border-left-color: var(--color-accent);"
+        >
+          <p class="font-display text-2xl font-light text-ink" style="font-style: italic; line-height: var(--leading-snug);">
+            "Both sides want to connect. Neither side moves. That's the gym intimidation deadlock."
+          </p>
+        </blockquote>
+      </div>
 
-      <p class="font-body text-lg text-ink" style="line-height: var(--leading-loose);">
+      <p data-reveal class="font-body text-lg text-ink" style="line-height: var(--leading-loose);">
         Most "gym buddy" apps try to solve this with profiles and matching —
         a dating-app model transplanted to the gym floor. That's the wrong diagnosis.
         The problem isn't discovery. It's <strong>permission</strong>.
@@ -49,7 +70,7 @@
     </div>
 
     <!-- Insight -->
-    <div class="mb-20 bg-paper-mid border border-paper-dark rounded-lg p-8 md:p-12">
+    <div data-reveal data-beat="The insight" class="mb-20 bg-paper-mid border border-paper-dark rounded-lg p-8 md:p-12">
       <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">The insight</p>
 
       <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
@@ -66,30 +87,40 @@
     </div>
 
     <!-- Design override moment -->
-    <div class="mb-20">
-      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">The decision that mattered most</p>
+    <div data-beat="The decision" class="mb-20">
+      <p data-reveal class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">The decision that mattered most</p>
 
-      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+      <p data-reveal class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
         The first design that came back was black-and-white, high-contrast, premium-feeling.
         Clean lines. Dark mode. The kind of thing that looks impressive in a Dribbble screenshot.
       </p>
 
-      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+      <p data-reveal data-reveal-delay="1" class="font-display text-3xl font-light text-ink my-8" style="line-height: var(--leading-snug);">
         I rejected it.
       </p>
 
-      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+      <p data-reveal class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
         Not because it was bad design. Because it was <em>wrong</em> design.
         The product's entire reason to exist is reducing gym intimidation —
         and the design was intimidating. The aesthetic contradicted the soul of the app.
       </p>
 
-      <p class="font-body text-lg text-ink mb-10" style="line-height: var(--leading-loose);">
+      <p data-reveal class="font-body text-lg text-ink mb-10" style="line-height: var(--leading-loose);">
         I gave the AI a new brief: warm, friendly, approachable — the antithesis
         of the "serious gym" look. It generated a warm light palette. That's the version that shipped.
       </p>
 
-      <div class="border border-accent-faint bg-accent-faint rounded-lg px-6 py-4">
+      <!-- The proof: the rejected design wipes into the shipped one -->
+      <BeforeAfter
+        before={heroOld}
+        after={heroNew}
+        beforeAlt="Spottr's rejected first design — black, high-contrast, dark mode"
+        afterAlt="Spottr's shipped design — warm, light, approachable"
+        beforeLabel="What came back"
+        afterLabel="What shipped"
+      />
+
+      <div data-reveal class="border border-accent-faint bg-accent-faint rounded-lg px-6 py-4 mt-10">
         <p class="font-body text-sm text-ink" style="line-height: var(--leading-normal);">
           <strong>The lesson isn't about taste.</strong>
           It's about knowing what the thing is <em>for</em> — and overriding the output when it misses that.
@@ -98,8 +129,58 @@
       </div>
     </div>
 
+    <!-- Iteration: the status system I rebuilt around mood -->
+    <div data-beat="The iteration" class="mb-20">
+      <p data-reveal class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">The feature I rebuilt</p>
+
+      <p data-reveal class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        The first version had a status system. When you checked in, you chose one —
+        Happy to Help, Need Guidance, or Just Training — so the room knew what kind of session
+        you were having.
+      </p>
+
+      <p data-reveal class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        It broke the moment I used it on myself. To set a status, you had to publicly declare
+        your competence: announce you were the expert, or admit you were the one who needed help.
+      </p>
+
+      <p data-reveal data-reveal-delay="1" class="font-display text-3xl font-light text-ink my-8" style="line-height: var(--leading-snug);">
+        I'd rebuilt the exact intimidation the app exists to remove.
+      </p>
+
+      <p data-reveal class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        So I tore it out and rebuilt it around mood instead of role — Locked in, Finding my rhythm,
+        Taking it easy, In between sets. None of them rank you. They just say where your head is.
+      </p>
+
+      <p data-reveal class="font-body text-lg text-ink mb-10" style="line-height: var(--leading-loose);">
+        Then willingness to connect became its own, separate thing: a single "welcome a hello" toggle.
+        You can be locked in and still open to a hello, or taking it easy and left alone. Those were
+        never the same question — the first design had just fused them together.
+      </p>
+
+      <!-- The proof: the status system wipes into the mood + toggle rebuild -->
+      <BeforeAfter
+        before={onboardingOld}
+        after={onboardingNew}
+        beforeAlt="Spottr's rejected status system — Happy to Help, Need Guidance, Just Training"
+        afterAlt="Spottr's shipped mood system — Locked in, Finding my rhythm, Taking it easy, plus a welcome-a-hello toggle"
+        beforeLabel="Status system"
+        afterLabel="Mood + a toggle"
+      />
+
+      <div data-reveal class="border border-accent-faint bg-accent-faint rounded-lg px-6 py-4 mt-10">
+        <p class="font-body text-sm text-ink" style="line-height: var(--leading-normal);">
+          <strong>Same lesson, twice.</strong>
+          The mechanic was never the problem — it was what it forced people to say about themselves.
+          A feature can work perfectly and still carry the wrong message. Catching that before a user
+          feels it is the actual job.
+        </p>
+      </div>
+    </div>
+
     <!-- Build -->
-    <div class="mb-20">
+    <div data-reveal data-beat="How it was built" class="mb-20">
       <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">How it was built</p>
 
       <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
@@ -115,7 +196,7 @@
     </div>
 
     <!-- Stack + status -->
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-8 border-t border-paper-dark">
+    <div data-reveal class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-8 border-t border-paper-dark">
       <div>
         <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">Stack</p>
         <div class="flex flex-wrap gap-2">

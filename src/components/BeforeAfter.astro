@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  before: ImageMetadata;
+  after: ImageMetadata;
+  beforeAlt: string;
+  afterAlt: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+}
+
+const {
+  before,
+  after,
+  beforeAlt,
+  afterAlt,
+  beforeLabel = 'Rejected',
+  afterLabel = 'Shipped',
+} = Astro.props;
+
+const imgAttrs = {
+  widths: [300, 600],
+  sizes: '(max-width: 640px) 45vw, 300px',
+} as const;
+---
+
+{/* Default: side-by-side comparison (works with no JS / reduced motion).
+    JS adds .ba--wipe to upgrade this into the pinned before→after wipe. */}
+<figure class="ba" data-ba>
+  <div class="ba__frame">
+    <Image class="ba__layer ba__before" src={before} alt={beforeAlt} {...imgAttrs} />
+    <Image class="ba__layer ba__after" src={after} alt={afterAlt} {...imgAttrs} />
+    <span class="ba__handle" aria-hidden="true"></span>
+  </div>
+  <figcaption class="ba__caption">
+    <span class="ba__tag ba__tag--before">{beforeLabel}</span>
+    <span class="ba__tag ba__tag--after">{afterLabel}</span>
+  </figcaption>
+</figure>

@@ -26,15 +26,15 @@ const steps = [
 <section id="process" class="bg-paper border-t border-paper-dark">
   <div class="max-w-4xl mx-auto px-6 py-24">
 
-    <div class="flex items-center gap-4 mb-16">
+    <div data-reveal class="flex items-center gap-4 mb-16">
       <p class="font-body text-sm text-ink-muted uppercase tracking-widest">How I work</p>
       <span class="flex-1 border-t border-paper-dark"></span>
     </div>
 
-    <h2 class="font-display text-4xl md:text-5xl font-light text-ink mb-6" style="line-height: var(--leading-tight);">
+    <h2 data-reveal class="font-display text-4xl md:text-5xl font-light text-ink mb-6" style="line-height: var(--leading-tight);">
       The method is the thing.
     </h2>
-    <p class="font-body text-lg text-ink-muted mb-20" style="max-width: 52ch; line-height: var(--leading-normal);">
+    <p data-reveal data-reveal-delay="1" class="font-body text-lg text-ink-muted mb-20" style="max-width: 52ch; line-height: var(--leading-normal);">
       Most people using AI tools don't talk about how. I do — because how is
       what separates building deliberately from building by accident.
     </p>
@@ -42,7 +42,7 @@ const steps = [
     <!-- Steps -->
     <div class="space-y-0 mb-20">
       {steps.map((step, i) => (
-        <div class:list={["flex gap-8 py-10", i < steps.length - 1 ? "border-b border-paper-dark" : ""]}>
+        <div data-reveal class:list={["flex gap-8 py-10", i < steps.length - 1 ? "border-b border-paper-dark" : ""]}>
           <span class="font-body text-xs text-ink-faint pt-1 shrink-0 w-6">{step.number}</span>
           <div>
             <h3 class="font-display text-xl font-medium text-ink mb-3">{step.title}</h3>
@@ -53,7 +53,7 @@ const steps = [
     </div>
 
     <!-- Signature: medium = message -->
-    <div class="bg-paper-mid border border-paper-dark rounded-lg p-8 md:p-10">
+    <div data-reveal class="bg-paper-mid border border-paper-dark rounded-lg p-8 md:p-10">
       <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-4">
         A note about this site
       </p>

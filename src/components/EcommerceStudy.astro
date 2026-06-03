@@ -11,21 +11,21 @@ const signals = [
   <div class="max-w-4xl mx-auto px-6 py-24">
 
     <!-- Header -->
-    <div class="flex items-center gap-4 mb-16">
+    <div data-reveal class="flex items-center gap-4 mb-16">
       <p class="font-body text-sm text-ink-muted uppercase tracking-widest">Case Study 02</p>
       <span class="flex-1 border-t border-paper-dark"></span>
       <span class="font-body text-xs text-ink-muted uppercase tracking-wider">Technical Credibility</span>
     </div>
 
-    <h2 class="font-display text-5xl md:text-6xl font-light text-ink mb-4" style="line-height: var(--leading-tight);">
+    <h2 data-reveal class="font-display text-5xl md:text-6xl font-light text-ink mb-4" style="line-height: var(--leading-tight);">
       Ecommerce Platform
     </h2>
-    <p class="font-display text-2xl font-light text-ink-muted mb-20" style="font-style: italic;">
+    <p data-reveal data-reveal-delay="1" class="font-display text-2xl font-light text-ink-muted mb-20" style="font-style: italic;">
       Built to prove I understand how real apps are assembled.
     </p>
 
     <!-- Honest framing -->
-    <div class="mb-16">
+    <div data-reveal class="mb-16">
       <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
         This project isn't a product. Nobody's buying anything through it.
         It exists to answer one question any technical screener will have:
@@ -41,11 +41,11 @@ const signals = [
 
     <!-- Engineering signals -->
     <div class="mb-16">
-      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-8">What's in it</p>
+      <p data-reveal class="font-body text-xs text-ink-faint uppercase tracking-widest mb-8">What's in it</p>
 
       <div class="grid gap-px bg-paper-dark border border-paper-dark rounded-lg overflow-hidden">
-        {signals.map((s) => (
-          <div class="bg-paper-mid p-6">
+        {signals.map((s, i) => (
+          <div data-reveal data-reveal-delay={i + 1} class="bg-paper-mid p-6">
             <p class="font-body text-sm font-semibold text-ink mb-1">{s.label}</p>
             <p class="font-body text-sm text-ink-muted" style="line-height: var(--leading-normal);">{s.detail}</p>
           </div>
@@ -54,7 +54,7 @@ const signals = [
     </div>
 
     <!-- Stack + status -->
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-8 border-t border-paper-dark">
+    <div data-reveal class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-8 border-t border-paper-dark">
       <div>
         <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">Stack</p>
         <div class="flex flex-wrap gap-2">
