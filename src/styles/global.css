@@ -255,8 +255,8 @@ html.lenis body {
   .ba--wipe.is-ba-revealed.ba--peek .ba__after { clip-path: inset(0 100% 0 0); }
   .ba--wipe.is-ba-revealed.ba--peek .ba__handle { left: 0; }
   @media (hover: hover) {
-    .ba--wipe.is-ba-revealed.ba--interactive:hover .ba__after { clip-path: inset(0 100% 0 0); }
-    .ba--wipe.is-ba-revealed.ba--interactive:hover .ba__handle { left: 0; }
+    .ba--wipe.is-ba-revealed.ba--interactive .ba__frame:hover .ba__after { clip-path: inset(0 100% 0 0); }
+    .ba--wipe.is-ba-revealed.ba--interactive .ba__frame:hover .ba__handle { left: 0; }
   }
 
   .ba__hint {
