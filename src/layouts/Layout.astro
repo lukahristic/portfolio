@@ -34,7 +34,7 @@ const {
 
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const coarse = window.matchMedia('(pointer: coarse)').matches; // touch devices
-      const NAV_OFFSET = 80; // px — matches scroll-margin-top: 5rem under the fixed nav
+      const NAV_OFFSET = 64; // px — matches scroll-margin-top: 4rem under the fixed nav
 
       // ── Smooth scroll ─────────────────────────────────────────────────────────
       // Off for reduced-motion and touch: native momentum scroll wins on phones.
