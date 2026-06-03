@@ -245,6 +245,39 @@ html.lenis body {
     color: var(--color-ink-faint);
   }
 
+  /* ── Replay / compare (enabled once the first wipe finishes) ── */
+  .ba--wipe.is-ba-revealed.ba--interactive .ba__frame { cursor: pointer; }
+  /* snappier than the dramatic first reveal */
+  .ba--wipe.ba--interactive .ba__after,
+  .ba--wipe.ba--interactive .ba__handle { transition-duration: 0.6s; }
+
+  /* Peek back at the "before": tap-toggle (touch) or hover (desktop). */
+  .ba--wipe.is-ba-revealed.ba--peek .ba__after { clip-path: inset(0 100% 0 0); }
+  .ba--wipe.is-ba-revealed.ba--peek .ba__handle { left: 0; }
+  @media (hover: hover) {
+    .ba--wipe.is-ba-revealed.ba--interactive:hover .ba__after { clip-path: inset(0 100% 0 0); }
+    .ba--wipe.is-ba-revealed.ba--interactive:hover .ba__handle { left: 0; }
+  }
+
+  .ba__hint {
+    display: block;
+    margin: 0.55rem auto 0;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: var(--text-xs);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-faint);
+    opacity: 0;
+    transition: opacity var(--dur-micro) var(--ease-out-soft);
+  }
+  .ba--wipe.ba--interactive .ba__hint { opacity: 0.75; }
+  .ba__hint::after { content: 'Hover to compare'; }
+  @media (hover: none) {
+    .ba__hint::after { content: 'Tap to compare'; }
+  }
+  .ba:not(.ba--wipe) .ba__hint { display: none; }  /* side-by-side already shows both */
+
   /* Reduced motion: stay side-by-side, no wipe (JS won't add .ba--wipe anyway). */
   @media (prefers-reduced-motion: reduce) {
     .ba--wipe .ba__after { clip-path: none; transition: none; }

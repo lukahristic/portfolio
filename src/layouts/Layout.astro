@@ -94,14 +94,37 @@ const {
       // Reveal-once when the frame is well into view.
       const baFigs = document.querySelectorAll<HTMLElement>('[data-ba]');
       if (!reduce && baFigs.length) {
-        baFigs.forEach((f) => f.classList.add('ba--wipe'));
+        const isTouch = window.matchMedia('(hover: none)').matches;
+
+        baFigs.forEach((fig) => {
+          fig.classList.add('ba--wipe');
+          // Touch: tap toggles a peek back at the "before". Desktop uses :hover (CSS).
+          if (isTouch) {
+            fig.addEventListener('click', () => {
+              if (fig.classList.contains('is-ba-revealed')) fig.classList.toggle('ba--peek');
+            });
+          }
+        });
+
+        // Enable hover/tap compare only after the dramatic first wipe completes.
+        const enableCompare = (fig: HTMLElement) => {
+          const after = fig.querySelector('.ba__after');
+          if (after) {
+            after.addEventListener('transitionend', () => fig.classList.add('ba--interactive'), { once: true });
+          } else {
+            fig.classList.add('ba--interactive');
+          }
+        };
+
         if ('IntersectionObserver' in window) {
           const baIo = new IntersectionObserver(
             (entries) => {
               for (const entry of entries) {
                 if (entry.isIntersecting) {
-                  entry.target.classList.add('is-ba-revealed');
-                  baIo.unobserve(entry.target);
+                  const fig = entry.target as HTMLElement;
+                  fig.classList.add('is-ba-revealed');
+                  baIo.unobserve(fig);
+                  enableCompare(fig);
                 }
               }
             },
@@ -109,7 +132,7 @@ const {
           );
           baFigs.forEach((f) => baIo.observe(f));
         } else {
-          baFigs.forEach((f) => f.classList.add('is-ba-revealed'));
+          baFigs.forEach((f) => f.classList.add('is-ba-revealed', 'ba--interactive'));
         }
       }
 
