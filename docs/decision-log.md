@@ -140,6 +140,14 @@
 - **Why (growth):** Spottr section intentionally unfinished at first; visible "launching → published → real gyms" progression is itself proof of follow-through (SOP-03). Architecture accommodates this from day one.
 - **Status:** Locked. Detail in content-architecture.md.
 
+### D-024 | Build | OG meta, Twitter Card, robots.txt added; og-image.png pending manual creation
+- **Decision:** Added Open Graph and Twitter Card meta tags to Layout.astro. Added robots.txt to public/. OG image spec written to public/og-image-SPEC.txt for manual creation in Figma or a design tool.
+- **Why:** Sharing the portfolio URL on LinkedIn, Twitter, or in an email should render a proper preview card with name, tagline, and a designed image — not a blank card. This is a one-time, high-leverage credibility detail.
+- **Base URL:** Using `https://wency.dev` as a placeholder constant in Layout.astro — must be replaced with the real Vercel URL before launch.
+- **Rejected:** Auto-generating the OG image in code (e.g. Satori / @vercel/og). Adds build complexity for a one-time asset that is better made with real design control in Figma. Simple PNG in /public is sufficient.
+- **Pending (manual):** Create og-image.png from the spec at public/og-image-SPEC.txt and save it to public/og-image.png.
+- **Status:** Code complete. Image and URL are pending pre-launch items.
+
 ---
 
 ## Lessons / Patterns (reusable)

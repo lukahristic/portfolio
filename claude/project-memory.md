@@ -84,6 +84,8 @@
 - [ ] Typeface pairing sign-off (post-init OK).
 - [ ] Single-page vs multi-page routing (decide at/just before wireframe).
 - [ ] (Later) Verbal interview prep — defending architectural choices out loud.
+- [x] Create og-image.png from spec at public/og-image-SPEC.txt and save to public/og-image.png.
+- [ ] Replace wency.dev placeholder URL (BASE_URL in Layout.astro) with real Vercel URL before launch.
 
 ## READY-TO-INITIALIZE CHECKLIST
 - [x] Strategy, brand, audience locked

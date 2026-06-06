@@ -1,0 +1,9 @@
+OG Image Specification
+----------------------
+Size: 1200 x 630px
+Background: #FAF7F2 (warm paper)
+Name: "Wency" — Fraunces font, light weight (300), ~72px, color #1F1A14
+Tagline: "Product builder who ships deliberately." — DM Sans, ~24px, color #6B5E4E
+Optional accent: a small terracotta rectangle or dot (#C05C2C) near the name
+Keep all text centered and away from edges (safe zone: 80px inset on all sides)
+Export as PNG, save to public/og-image.png
