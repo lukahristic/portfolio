@@ -53,13 +53,15 @@ const ogImageURL = new URL(ogImage, BASE_URL);
       import Lenis from 'lenis';
 
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const coarse = window.matchMedia('(pointer: coarse)').matches; // touch devices
       const NAV_OFFSET = 64; // px — matches scroll-margin-top: 4rem under the fixed nav
 
       // ── Smooth scroll ─────────────────────────────────────────────────────────
-      // Off for reduced-motion and touch: native momentum scroll wins on phones.
+      // Disabled only for prefers-reduced-motion. On touch devices Lenis leaves
+      // native finger-scroll alone (smoothTouch: false is the default) but still
+      // handles programmatic scrollTo() calls — so anchor links feel smooth on
+      // every device without fighting the browser's momentum scroll.
       let lenis: Lenis | null = null;
-      if (!reduce && !coarse) {
+      if (!reduce) {
         lenis = new Lenis({
           lerp: 0.1,           // calm glide — "expensive magazine", not ice rink
           smoothWheel: true,
@@ -83,7 +85,7 @@ const ogImageURL = new URL(ogImage, BASE_URL);
           if (lenis) {
             lenis.scrollTo(target, { offset: -NAV_OFFSET, duration: 1.2 });
           } else {
-            target.scrollIntoView({ behavior: 'smooth' }); // uses scroll-margin-top
+            target.scrollIntoView(); // reduced-motion: instant jump, uses scroll-margin-top
           }
           history.pushState(null, '', hash);
         });
