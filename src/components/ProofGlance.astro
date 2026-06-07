@@ -28,12 +28,10 @@ const projects = [
       Work
     </p>
 
-    <div class="grid md:grid-cols-2 gap-px bg-paper-dark">
+    <div data-reveal data-reveal-delay="1" class="grid md:grid-cols-2 gap-px bg-paper-dark">
       {projects.map((p, i) => (
         <a
           href={p.href}
-          data-reveal
-          data-reveal-delay={i + 1}
           class="group bg-paper-mid p-8 hover:bg-paper transition-colors"
         >
           <div class="flex items-start justify-between mb-6">
