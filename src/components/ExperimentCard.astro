@@ -1,0 +1,99 @@
+---
+import type { Experiment } from '../data/experiments';
+
+interface Props {
+  experiment: Experiment;
+}
+
+const { experiment } = Astro.props;
+const { id, title, status, description, tech, insight, writeupHref } = experiment;
+
+const statusLabel: Record<string, string> = {
+  complete: 'Complete',
+  'in-progress': 'In Progress',
+  research: 'Research',
+};
+---
+
+<article class="experiment-card" data-expanded="false" data-id={id}>
+  <button
+    class="card-toggle w-full text-left px-6 py-6 md:px-8 md:py-8"
+    aria-expanded="false"
+    aria-controls={`exp-detail-${id}`}
+  >
+    <div class="flex items-start justify-between gap-4 mb-4">
+      <span class:list={['status-badge', `status-badge--${status}`]}>
+        <span class="status-dot" aria-hidden="true"></span>
+        {statusLabel[status]}
+      </span>
+      <span class="card-expand-icon" aria-hidden="true">+</span>
+    </div>
+
+    <h3
+      class="font-display text-xl font-medium text-ink mb-3"
+      style="line-height: var(--leading-snug);"
+    >
+      {title}
+    </h3>
+
+    <p
+      class="font-body text-sm text-ink-muted mb-5"
+      style="line-height: var(--leading-normal);"
+    >
+      {description}
+    </p>
+
+    <div class="flex flex-wrap gap-2">
+      {tech.map((t) => (
+        <span class="font-body text-xs text-ink-muted border border-paper-dark px-2 py-0.5 rounded">
+          {t}
+        </span>
+      ))}
+    </div>
+  </button>
+
+  <div
+    class="card-expandable"
+    id={`exp-detail-${id}`}
+    role="region"
+    aria-label={`${title} details`}
+  >
+    <div class="card-inner">
+      <div class="border-t border-paper-dark mx-6 md:mx-8"></div>
+      <div class="px-6 py-5 md:px-8 md:py-6">
+        <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">
+          Key insight
+        </p>
+        <div class="insight-callout mb-5">
+          <p
+            class="font-display text-base text-ink font-light"
+            style="font-style: italic; line-height: var(--leading-snug);"
+          >
+            {insight}
+          </p>
+        </div>
+        {writeupHref ? (
+          <a
+            href={writeupHref}
+            class="font-body text-sm text-accent hover:text-accent-warm transition-colors"
+          >
+            → Read write-up
+          </a>
+        ) : (
+          <span class="font-body text-sm text-ink-faint">Write-up coming</span>
+        )}
+      </div>
+    </div>
+  </div>
+</article>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.experiment-card').forEach((card) => {
+    const toggle = card.querySelector<HTMLButtonElement>('.card-toggle');
+    toggle?.addEventListener('click', () => {
+      const expanded = card.getAttribute('data-expanded') === 'true';
+      card.setAttribute('data-expanded', String(!expanded));
+      toggle.setAttribute('aria-expanded', String(!expanded));
+    });
+  });
+</script>

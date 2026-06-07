@@ -412,3 +412,104 @@ html.lenis body {
     }
   }
 }
+
+/* ─── Experiment Cards ───────────────────────────────────────────────────── */
+.experiment-card {
+  border: 1px solid var(--color-paper-dark);
+  border-left: 3px solid var(--color-paper-dark);
+  border-radius: 0.5rem;
+  background: var(--color-paper);
+  overflow: hidden;
+  transition: border-left-color var(--dur-micro) var(--ease-out-soft);
+}
+
+.experiment-card:has(.card-toggle:hover),
+.experiment-card[data-expanded="true"] {
+  border-left-color: var(--color-accent);
+}
+
+.card-toggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  appearance: none;
+}
+
+.card-toggle:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -2px;
+  border-radius: 0.5rem;
+}
+
+/* Expand/collapse via the grid-template-rows trick (no max-height hack) */
+.card-expandable {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 340ms var(--ease-out-soft);
+}
+
+.experiment-card[data-expanded="true"] .card-expandable {
+  grid-template-rows: 1fr;
+}
+
+.card-inner {
+  overflow: hidden;
+}
+
+/* Insight block — left border accent */
+.insight-callout {
+  border-left: 2px solid var(--color-accent-faint);
+  padding-left: 1rem;
+  transition: border-left-color var(--dur-micro) var(--ease-out-soft);
+}
+
+.experiment-card[data-expanded="true"] .insight-callout {
+  border-left-color: var(--color-accent);
+}
+
+/* +/× icon rotates 45deg on expand */
+.card-expand-icon {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--color-ink-faint);
+  user-select: none;
+  flex-shrink: 0;
+  transition:
+    transform var(--dur-micro) var(--ease-out-soft),
+    color var(--dur-micro) var(--ease-out-soft);
+}
+
+.experiment-card[data-expanded="true"] .card-expand-icon {
+  transform: rotate(45deg);
+  color: var(--color-accent);
+}
+
+/* Status badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.status-badge--complete        { color: var(--color-accent); }
+.status-badge--complete        .status-dot { background: var(--color-accent); }
+
+/* Warm amber — status-only color, not in global token set */
+.status-badge--in-progress     { color: #9B7340; }
+.status-badge--in-progress     .status-dot { background: #9B7340; }
+
+.status-badge--research        { color: var(--color-ink-faint); }
+.status-badge--research        .status-dot { background: var(--color-ink-faint); }
