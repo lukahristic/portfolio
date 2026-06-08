@@ -1,6 +1,9 @@
 ---
 import { experiments } from '../data/experiments';
 import ExperimentCard from './ExperimentCard.astro';
+
+const featured = experiments.filter((e) => e.featured === true);
+const secondary = experiments.filter((e) => e.featured !== true);
 ---
 
 <section id="lab" class="bg-paper-mid border-t border-paper-dark">
@@ -17,7 +20,7 @@ import ExperimentCard from './ExperimentCard.astro';
       class="font-display text-4xl md:text-5xl font-light text-ink mb-6"
       style="line-height: var(--leading-tight);"
     >
-      Research Log.
+      Systems Lab.
     </h2>
 
     <p
@@ -26,8 +29,8 @@ import ExperimentCard from './ExperimentCard.astro';
       class="font-body text-lg text-ink-muted mb-4"
       style="max-width: 52ch; line-height: var(--leading-normal);"
     >
-      Not every idea ships as a product. Some stay in notebooks. Some become SOPs.
-      Some become the invisible architecture inside larger systems.
+      Not every insight comes from shipping a product. Some come from hitting a wall,
+      diagnosing why, and building the fix into the system.
     </p>
 
     <p
@@ -36,16 +39,38 @@ import ExperimentCard from './ExperimentCard.astro';
       class="font-body text-lg text-ink-muted mb-16"
       style="max-width: 52ch; line-height: var(--leading-normal);"
     >
-      These are the AI and automation experiments I'm running in the open — memory
-      architectures, orchestration patterns, knowledge systems, prompt engineering.
-      Built to understand, documented to reuse.
+      These are the AI engineering decisions I've made in the open — memory architectures,
+      prompt systems, security patterns, context engineering.
+      Built to understand. Documented to reuse.
     </p>
 
-    <div data-reveal data-reveal-delay="3" class="grid md:grid-cols-2 gap-4">
-      {experiments.map((experiment) => (
+    <div data-reveal data-reveal-delay="3" class="grid md:grid-cols-2 gap-4 mb-12">
+      {featured.map((experiment) => (
         <ExperimentCard experiment={experiment} />
       ))}
     </div>
+
+    {secondary.length > 0 && (
+      <div data-reveal>
+        <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-4">More experiments</p>
+        <div class="flex flex-col gap-2">
+          {secondary.map((experiment) => (
+            <div class="flex items-start gap-4 px-4 py-3 border border-paper-dark rounded-lg">
+              <div>
+                <p class="font-body text-sm text-ink-muted mb-2" style="line-height: var(--leading-snug);">{experiment.title}</p>
+                <div class="flex flex-wrap gap-1">
+                  {experiment.tech.map((t) => (
+                    <span class="font-body text-xs text-ink-faint border border-paper-dark px-2 py-0.5 rounded">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
 
   </div>
 </section>

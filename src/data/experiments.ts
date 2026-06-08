@@ -9,6 +9,7 @@ export interface Experiment {
   insight: string;
   date: string;         // YYYY-MM — used for future timeline sort
   writeupHref?: string; // undefined until a write-up exists
+  featured?: boolean;
 }
 
 /*
@@ -17,6 +18,42 @@ export interface Experiment {
  * it has not been built yet.
  */
 export const experiments: Experiment[] = [
+  {
+    id: 'llm-project-memory',
+    title: 'LLM context engineering',
+    status: 'complete',
+    description:
+      'Built layered context files across two active projects — project-memory.md, CLAUDE.md, decision-log.md — to re-establish full architectural context at session start. Emerged from observing what got re-explained or decided inconsistently without it.',
+    tech: ['Claude Code', 'CLAUDE.md', 'Markdown', 'Context engineering'],
+    insight:
+      'The bottleneck is not AI capability — it\'s whether the AI has the right context at the right moment. A structured memory file outperforms an unstructured dump because the AI locates the relevant section instead of scanning undifferentiated prose.',
+    date: '2026-05',
+    featured: true,
+  },
+  {
+    id: 'voice-calibration',
+    title: 'Prompt drift correction',
+    status: 'complete',
+    description:
+      'AI-generated copy was drifting soft — over-explained, not direct enough for mobile UI moments. Built a correction skill layer on top of the original voice guide, naming specific failure modes with before/after pairs and explicit precedence rules. Ran a retroactive audit across all existing screens.',
+    tech: ['Claude', 'Prompt engineering', 'Skill files', 'Voice systems'],
+    insight:
+      'Prompt drift is cumulative and invisible per-output. A correction layer that names specific failure modes outperforms a rewritten prompt — it targets the drift without losing what worked in the original.',
+    date: '2026-05',
+    featured: true,
+  },
+  {
+    id: 'safety-in-code',
+    title: 'Safety encoded at the data layer',
+    status: 'complete',
+    description:
+      'Encoded safety rules as database constraints rather than application logic or Terms of Service: the one-intro limit is a UNIQUE constraint, blocks are enforced by RLS so blocked users return nothing, women-only spaces require verified status at the database level.',
+    tech: ['PostgreSQL', 'RLS', 'Supabase', 'Security architecture'],
+    insight:
+      'A rule that only exists in a Terms of Service is a rule motivated bad actors ignore. When the mechanism can be automated without changing the meaning, automate it. The constraint is architectural, not advisory.',
+    date: '2026-06',
+    featured: true,
+  },
   {
     id: 'photo-upload-debugging',
     title: 'Photo Upload: Three-Architecture Debug',
@@ -27,6 +64,7 @@ export const experiments: Experiment[] = [
     insight:
       'Silent 403s in auth flows almost always mean credentials are added at one layer and stripped at another. The layer that attaches auth headers and the layer that evaluates them are rarely the same layer.',
     date: '2026-05',
+    featured: false,
   },
   {
     id: 'rls-security-audit',
@@ -38,17 +76,7 @@ export const experiments: Experiment[] = [
     insight:
       'USING(true) is not a "public read" policy — it is a "bypass all row filtering" policy. Default scaffolding often looks safe without being safe. RLS needs its own audit pass, independent of application-layer access checks.',
     date: '2026-06',
-  },
-  {
-    id: 'voice-calibration',
-    title: 'Voice Calibration: Correcting Prompt Drift',
-    status: 'complete',
-    description:
-      'After shipping initial copy for a mobile app, AI-generated outputs were drifting too soft — poetic, over-explained, not direct enough for the moments that matter. Built a correction skill layer on top of the original voice guide, naming specific failure modes with before/after pairs and an explicit precedence rule. Then ran a retroactive audit across all existing screens.',
-    tech: ['Claude', 'Skill files', 'Prompt engineering'],
-    insight:
-      'Prompt drift is cumulative and invisible per-output. A correction layer that names specific failure modes outperforms a rewritten prompt — it targets the drift without losing what worked in the original guide.',
-    date: '2026-05',
+    featured: false,
   },
   {
     id: 'feature-freeze',
@@ -60,28 +88,7 @@ export const experiments: Experiment[] = [
     insight:
       'AI-assisted development lowers the cost of building so much that judgment about what to build becomes the constraint — not technical capability. When building is easy, it becomes the default. Making building harder is sometimes the highest-leverage move.',
     date: '2026-05',
-  },
-  {
-    id: 'safety-in-code',
-    title: 'Safety Constraints in Code, Not Policy',
-    status: 'complete',
-    description:
-      'Encoded safety rules at the data layer rather than Terms of Service: a user physically cannot send a second intro until the first is replied to, block relationships are enforced by RLS so blocked users cannot see each other\'s check-ins, and women-only spaces require verified status at the database level. The constraint is architectural, not advisory.',
-    tech: ['PostgreSQL RLS', 'Supabase', 'React Native'],
-    insight:
-      'A rule that only exists in a Terms of Service is a rule motivated bad actors ignore. There are two categories of safety constraint: those where the mechanism can be automated without changing the meaning, and those where the mechanism is the meaning.',
-    date: '2026-06',
-  },
-  {
-    id: 'llm-project-memory',
-    title: 'LLM Project Memory Across Sessions',
-    status: 'complete',
-    description:
-      'Built layered context files (project-memory.md, CLAUDE.md, AGENTS.md, decision-log.md) across two active projects to re-establish full architectural context at the start of each AI session. The structure emerged from observing what got re-litigated, re-explained, or decided inconsistently when context was missing.',
-    tech: ['Claude Code', 'CLAUDE.md', 'Markdown'],
-    insight:
-      'The bottleneck is not AI capability — it is whether the AI has the right context at the right moment. A structured memory file outperforms an unstructured dump because the AI can locate the relevant section rather than scanning undifferentiated prose.',
-    date: '2026-05',
+    featured: false,
   },
   {
     id: 'motion-constraint-system',
@@ -93,5 +100,6 @@ export const experiments: Experiment[] = [
     insight:
       'Motion consistency comes from a shared grammar, not a style guide. Locking tokens before code converts taste decisions into engineering decisions — reviewable, enforceable, consistent. Without a gate, cool-only animations accumulate by default.',
     date: '2026-05',
+    featured: false,
   },
 ];

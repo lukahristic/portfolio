@@ -195,6 +195,41 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
       </p>
     </div>
 
+    <!-- Architecture -->
+    <div data-reveal class="mb-20">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-4">Architecture</p>
+      <h3 class="font-display text-2xl font-light text-ink mb-8" style="line-height: var(--leading-snug);">How it's assembled</h3>
+
+      <div class="grid md:grid-cols-3 gap-4 mb-10">
+        <div class="bg-paper-mid border border-paper-dark rounded-lg p-6">
+          <p class="font-body text-xs text-accent uppercase tracking-wider mb-3">Mobile App</p>
+          <p class="font-body text-sm text-ink-muted mb-3" style="line-height: var(--leading-normal);">React Native · Expo · expo-router</p>
+          <p class="font-body text-sm text-ink-faint" style="line-height: var(--leading-normal);">Auth, onboarding, live member list, messaging, QR check-in, push notifications</p>
+        </div>
+        <div class="bg-paper-mid border border-paper-dark rounded-lg p-6">
+          <p class="font-body text-xs text-accent uppercase tracking-wider mb-3">Admin Portal</p>
+          <p class="font-body text-sm text-ink-muted mb-3" style="line-height: var(--leading-normal);">Next.js 14 · Vercel · SSR auth</p>
+          <p class="font-body text-sm text-ink-faint" style="line-height: var(--leading-normal);">Platform HQ and gym-partner portals, server-side Supabase sessions</p>
+        </div>
+        <div class="bg-paper-mid border border-paper-dark rounded-lg p-6">
+          <p class="font-body text-xs text-accent uppercase tracking-wider mb-3">Backend</p>
+          <p class="font-body text-sm text-ink-muted mb-3" style="line-height: var(--leading-normal);">Postgres · RLS · Realtime · Edge Functions · pg_cron</p>
+          <p class="font-body text-sm text-ink-faint" style="line-height: var(--leading-normal);">JWT auth, row-level security on all tables, WebSocket live updates, Deno serverless functions, scheduled cleanup jobs</p>
+        </div>
+      </div>
+
+      <div data-reveal class="border-l-4 border-accent rounded-r-lg px-6 py-5" style="background-color: var(--color-accent-faint);">
+        <p class="font-body text-xs text-accent uppercase tracking-widest mb-3">What makes it real</p>
+        <p class="font-display text-lg font-light text-ink mb-4" style="line-height: var(--leading-snug);">The constraint is at the data layer.</p>
+        <p class="font-body text-sm text-ink" style="line-height: var(--leading-normal);">
+          Block relationships enforced by RLS — blocked users cannot see each other's check-ins,
+          not because the app hides them, but because the database returns nothing.
+          The one-intro limit is a UNIQUE constraint on thread pairs, not an application rule.
+          Safety and integrity built in, not bolted on.
+        </p>
+      </div>
+    </div>
+
     <!-- Stack + status -->
     <div data-reveal class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-8 border-t border-paper-dark">
       <div>
@@ -209,7 +244,7 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
       </div>
       <div class="text-right">
         <span class="font-body text-xs text-accent uppercase tracking-wider bg-accent-faint px-3 py-1 rounded-full">
-          Launching — story grows here
+          Beta · Launching soon
         </span>
       </div>
     </div>
