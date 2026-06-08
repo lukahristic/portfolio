@@ -1,6 +1,5 @@
 ---
 import { experiments } from '../data/experiments';
-import ExperimentCard from './ExperimentCard.astro';
 
 const featured = experiments.filter((e) => e.featured === true);
 const secondary = experiments.filter((e) => e.featured !== true);
@@ -44,9 +43,41 @@ const secondary = experiments.filter((e) => e.featured !== true);
       Built to understand. Documented to reuse.
     </p>
 
-    <div data-reveal data-reveal-delay="3" class="grid md:grid-cols-2 gap-4 mb-12">
+    <div data-reveal data-reveal-delay="3" class="flex flex-col gap-2 mb-8">
       {featured.map((experiment) => (
-        <ExperimentCard experiment={experiment} />
+        <div
+          class="featured-exp-row border border-paper-dark rounded-lg overflow-hidden"
+          style="border-left-width: 3px;"
+          data-expanded="false"
+          data-id={experiment.id}
+        >
+          <button
+            class="feat-toggle w-full text-left flex items-start gap-4 px-4 py-3"
+            aria-expanded="false"
+            aria-controls={`feat-detail-${experiment.id}`}
+          >
+            <div class="flex-1 min-w-0">
+              <span class="font-body text-sm text-ink-muted block mb-2" style="line-height: var(--leading-snug);">{experiment.title}</span>
+              <div class="flex flex-wrap gap-1">
+                {experiment.tech.map((t) => (
+                  <span class="font-body text-xs text-ink-faint border border-paper-dark px-2 py-0.5 rounded">{t}</span>
+                ))}
+              </div>
+            </div>
+            <span class="card-expand-icon flex-shrink-0 mt-0.5" aria-hidden="true">+</span>
+          </button>
+          <div class="card-expandable" id={`feat-detail-${experiment.id}`}>
+            <div class="card-inner">
+              <div style="border-top: 1px solid var(--color-paper-dark); margin: 0 1rem;"></div>
+              <div class="px-4 py-4">
+                <p class="font-body text-sm text-ink mb-4" style="line-height: var(--leading-normal);">{experiment.description}</p>
+                <div class="insight-callout">
+                  <p class="font-display text-sm text-ink font-light" style="font-style: italic; line-height: var(--leading-snug);">{experiment.insight}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       ))}
     </div>
 
@@ -74,3 +105,34 @@ const secondary = experiments.filter((e) => e.featured !== true);
 
   </div>
 </section>
+
+<style>
+  .featured-exp-row {
+    transition: border-left-color var(--dur-micro) var(--ease-out-soft);
+  }
+  .featured-exp-row[data-expanded="true"],
+  .featured-exp-row:has(.feat-toggle:hover) {
+    border-left-color: var(--color-accent);
+  }
+  .featured-exp-row[data-expanded="true"] .card-expandable {
+    grid-template-rows: 1fr;
+  }
+  .featured-exp-row[data-expanded="true"] .card-expand-icon {
+    transform: rotate(45deg);
+    color: var(--color-accent);
+  }
+  .featured-exp-row[data-expanded="true"] .insight-callout {
+    border-left-color: var(--color-accent);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.featured-exp-row').forEach((row) => {
+    const toggle = row.querySelector<HTMLButtonElement>('.feat-toggle');
+    toggle?.addEventListener('click', () => {
+      const expanded = row.getAttribute('data-expanded') === 'true';
+      row.setAttribute('data-expanded', String(!expanded));
+      toggle.setAttribute('aria-expanded', String(!expanded));
+    });
+  });
+</script>
