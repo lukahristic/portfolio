@@ -5,18 +5,20 @@ const projects = [
     name: "Spottr",
     description: "Gym community app that removes the intimidation barrier between gym-goers.",
     stack: ["React Native", "Expo", "Supabase"],
-    status: "Launching",
+    status: "Private beta",
     statusStyle: "accent",
-    href: "#spottr",
+    href: "/work/spottr",
+    note: "Read the case study",
   },
   {
     index: "02",
-    name: "Ecommerce Platform",
-    description: "Full-stack web application with auth, a real database, and a working deploy pipeline.",
-    stack: ["TypeScript", "Next.js", "Docker", "Vercel"],
-    status: "Shipped",
+    name: "MotorShop",
+    description: "A learning build, taken seriously: a parts store where every part knows which bikes it fits. Deployed, with a login you can use.",
+    stack: ["Next.js", "TypeScript", "Prisma", "Postgres", "Docker"],
+    status: "Live demo",
     statusStyle: "muted",
-    href: "#ecommerce",
+    href: "/work/motorshop",
+    note: "Open the demo",
   },
 ];
 ---
@@ -56,13 +58,15 @@ const projects = [
             {p.description}
           </p>
 
-          <div class="flex flex-wrap gap-2">
+          <div class="flex flex-wrap gap-2 mb-6">
             {p.stack.map((tech) => (
               <span class="font-body text-xs text-ink-muted border border-paper-dark px-2 py-0.5 rounded">
                 {tech}
               </span>
             ))}
           </div>
+
+          <span class="font-body text-sm text-accent">{p.note} →</span>
         </a>
       ))}
     </div>

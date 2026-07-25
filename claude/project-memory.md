@@ -1,12 +1,17 @@
 # Project Memory — Portfolio
 
 > High-density memory. Compressed on purpose. Update on every significant decision.
-> Last updated: discovery in progress (Category 6 of 8 reached).
+> Last updated: 2026-07-25 — site rebuilt to 5 routes (D-025..D-032). Discovery is long done.
 
 ## WHO (the person)
-- Currently employed in a **non-developer role**; building toward a developer job in spare time.
-- Self-taught via **building-while-learning** with AI tools (Claude Code primary, ChatGPT for prompt polishing).
-- Working method is deliberate, NOT careless: plans prompts, uses **plan mode**, **reads docs before implementing**. This is directed AI building, not blind acceptance.
+- **Wency Valentin.** Manila, PH. Targeting remote-first.
+- **Has a BS in Information Technology** (Bestlink College of the Philippines). ⚠️ Earlier memory assumed "self-taught, no formal credential" — that was WRONG and it was shaping the positioning defensively. Corrected 2026-07-25 from his résumé.
+- **6+ years at Accenture (2020–present), non-tech:**
+  - ~5 yrs Healthcare Claims & Appeals — claims, appeals, case analysis, discrepancy detection, audit-ready documentation, confidential data handling.
+  - ~1 yr current: **Content Moderator, Developer Applications** — reviews developer submissions against platform policy: risk indicators, violations, and *identifying policy gaps*. **Client is confidential and must never be named publicly.**
+- **Why that matters:** the origin story is not an analogy. He judges whether other people's software follows the rules for a living, then builds apps where the rules are database constraints rather than policy text. The RLS audit (finding `USING(true)` granted to `anon` in his own schema) is that same review turned on himself.
+- Learned web dev starting **2022**, stalled through 2024–25, returned **Feb 2026** with AI tooling. The pause is visible in his contribution graph and is shown deliberately on `/about` — same person, same job, different output.
+- Working method is deliberate, NOT careless: plans prompts, uses **plan mode**, **reads docs before implementing**. Directed AI building, not blind acceptance.
 - Honest self-assessment: cannot walk through every line of code, BUT understands app flow, architecture, and tech-stack choices.
 
 ## CORE BRAND POSITIONING (locked direction, not yet final copy)
@@ -74,15 +79,22 @@
 - **Motion:** narrative immersion only (D-009); respect reduced-motion; performance budget.
 - **Signature (D-021):** transparently "built with AI, here's how" — medium = message.
 
-## CONTENT ARCHITECTURE (locked — D-023, full detail in content-architecture.md)
-- 7 sections ordered by the visitor's evolving question: (1) opening (2) proof glance (3) Spottr [heart] (4) ecommerce (5) how-I-work + "built with AI" signature (6) experiments lab (7) warm close.
-- Order load-bearing; Spottr section grows with the launch.
+## CONTENT ARCHITECTURE (rebuilt 2026-07-25 — D-026, supersedes the single-page form of D-023)
+- **5 routes:** `/` · `/work/spottr` · `/work/motorshop` · `/about` · `/decisions`. Each has its own title/description/canonical so a project URL can go in an application.
+- `/` = hero → ProofGlance (two doors) → Lab → colophon → close. Question-ordering survives; it now orders the homepage and the sequence of doors.
+- `/about` is spined on a **timeline** (2020 → now), day job as a continuous band under everything including the pause. Ends with "what I'm working out right now" — every line linked to an artifact, no adjectives.
+- `/decisions` is a **curated first-person rewrite** (`src/data/decisions.ts`). `docs/decision-log.md` stays private — see D-031.
+- Process section deleted (D-027); its one distinctive note survives as `Colophon.astro`.
+- Legacy `/#spottr` and `/#ecommerce` forwarded by an inline pre-paint script on `/`.
+- Still to build: `/log` (dated stream — Lab merges into it), Spottr launch log, homepage "Currently" block.
 
 ## OPEN THREADS (non-blocking)
-- [ ] U-06 Set an explicit target date/milestone so "ready" has an edge.
-- [ ] Palette swatch sign-off (Tailwind tokens — post-init OK).
-- [ ] Typeface pairing sign-off (post-init OK).
-- [ ] Single-page vs multi-page routing (decide at/just before wireframe).
+- [x] U-06 target date — **set 2026-07-25: applications out within a month**, staying open to anything earlier. Risk closed.
+- [x] Palette swatch sign-off — shipped in `global.css` (paper `#FAF7F2`, ink `#1F1A14`, terracotta `#C05C2C`).
+- [x] Typeface pairing sign-off — shipped: Fraunces + DM Sans.
+- [x] Single-page vs multi-page routing — **multi-page, 5 routes** (D-026).
+- [ ] Owner action: GitHub profile has no bio/location/pinned repos. **Archive** `wencyvalentin` and `five-horseman` — do NOT privatize; `/about` links both as timeline evidence and private repos would 404.
+- [ ] Decide whether naming **Accenture** on `/about` stays (currently named; client never is).
 - [ ] (Later) Verbal interview prep — defending architectural choices out loud.
 - [x] Create og-image.png from spec at public/og-image-SPEC.txt and save to public/og-image.png.
 - [x] Replace wency.dev placeholder URL (BASE_URL in Layout.astro) with real Vercel URL before launch. → https://portfolio-wency.vercel.app

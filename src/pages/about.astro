@@ -1,0 +1,348 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Close from '../components/Close.astro';
+
+/*
+ * The timeline is the spine of this page. Two tracks on one line: the day job
+ * runs underneath everything (including the pause), and the building sits on
+ * top of it. Rule: a node with no artifact is an adjective — cut it.
+ */
+type Node = {
+  year: string;
+  track: 'work' | 'build' | 'pause';
+  title: string;
+  detail?: string;
+  href?: string;
+  hrefLabel?: string;
+};
+
+const timeline: Node[] = [
+  {
+    year: '2020',
+    track: 'work',
+    title: 'Healthcare claims and appeals',
+    detail:
+      'Accenture. Medical claims, provider and customer appeals, coverage disputes. Reading a policy against a real case and deciding which way it fell — then documenting it well enough to survive an audit.',
+  },
+  {
+    year: '2022',
+    track: 'build',
+    title: 'Started learning web development',
+    detail: 'Tutorials, mostly. I could follow along and I could not start from nothing.',
+  },
+  {
+    year: '2023',
+    track: 'build',
+    title: 'First site written by hand',
+    detail: 'Static HTML and CSS. Small, but nobody told me what to type.',
+    href: 'https://github.com/lukahristic/five-horseman',
+    hrefLabel: 'Repo',
+  },
+  {
+    year: '2024–25',
+    track: 'pause',
+    title: 'Stopped',
+    detail:
+      'No commits for two years. The distance between a tutorial and a finished thing stayed wide enough that I stopped walking toward it.',
+  },
+  {
+    year: '2025',
+    track: 'work',
+    title: 'Moved to reviewing developer applications',
+    detail:
+      'Still Accenture, different work: assessing developer submissions against platform policy — risk indicators, violations, and the places where the policy itself had a gap. A year of reading other people’s software for whether it followed the rules.',
+  },
+  {
+    year: 'Feb 2026',
+    track: 'build',
+    title: 'Came back',
+    detail:
+      'A single static page. Unremarkable except for what happened over the next five months.',
+    href: 'https://github.com/lukahristic/wencyvalentin',
+    hrefLabel: 'Repo',
+  },
+  {
+    year: 'Apr 2026',
+    track: 'build',
+    title: 'MotorShop',
+    detail:
+      'A parts store where fitment is a relationship, not a field. Hand-written authentication, access control at the middleware, Postgres in Docker locally and managed in production.',
+    href: '/work/motorshop',
+    hrefLabel: 'Case study',
+  },
+  {
+    year: 'May 2026',
+    track: 'build',
+    title: 'Spottr',
+    detail:
+      'A gym app, and the first thing I built where the safety rules had to be real. 226 commits across a mobile app, an admin portal, a marketing site, and the migrations.',
+    href: '/work/spottr',
+    hrefLabel: 'Case study',
+  },
+  {
+    year: 'May 2026',
+    track: 'build',
+    title: 'Froze the features',
+    detail:
+      'Audited my own codebase and found an admin system, a partner portal, and push infrastructure — with zero validated users. Wrote the freeze into the project rules so the tooling couldn’t add more.',
+    href: '/#feature-freeze',
+    hrefLabel: 'Write-up',
+  },
+  {
+    year: 'Jun 2026',
+    track: 'build',
+    title: 'Audited my own database',
+    detail:
+      'Found permissive row-level security policies granted to the anonymous role in my own production schema. Anyone with the public key could have read every gym’s roster. I rewrote the policies.',
+    href: '/#rls-security-audit',
+    hrefLabel: 'Write-up',
+  },
+  {
+    year: 'Jun 2026',
+    track: 'build',
+    title: 'This site',
+    detail:
+      'Zero-JavaScript by default, motion budget set before the first animation, every decision recorded with the option it beat.',
+    href: '/decisions',
+    hrefLabel: 'Decisions',
+  },
+  {
+    year: 'Now',
+    track: 'build',
+    title: 'Taking Spottr to gyms',
+    detail:
+      'Talking to gym owners and writing down what comes back. The product is built; whether it is wanted is a different question and I would rather find out from a person than from a dashboard.',
+  },
+];
+
+const exploring = [
+  {
+    label: 'Safety as schema, not policy text',
+    proof: 'Block rules enforced by RLS; the one-intro limit is a UNIQUE constraint',
+    href: '/work/spottr',
+  },
+  {
+    label: 'Interfaces that don’t make people rank themselves',
+    proof: 'Tore out a status feature that forced users to declare their experience level',
+    href: '/work/spottr',
+  },
+  {
+    label: 'Security auditing my own work',
+    proof: 'Found permissive anon policies in a schema I had already shipped',
+    href: '/#rls-security-audit',
+  },
+  {
+    label: 'Context engineering for AI tooling',
+    proof: 'Layered memory files that survive a session reset across two projects',
+    href: '/#llm-project-memory',
+  },
+  {
+    label: 'Knowing when to stop building',
+    proof: 'A feature freeze written into the rules, after shipping infrastructure nobody had asked for',
+    href: '/#feature-freeze',
+  },
+];
+---
+
+<Layout
+  title="About — Wency Valentin"
+  description="Six years at Accenture deciding whether things follow the rules — healthcare claims, then developer application review. Now building software where the rules are enforced by the database."
+>
+  <Nav />
+
+  <main id="top" class="pt-16">
+    <section class="bg-paper">
+      <div class="max-w-4xl mx-auto px-6 py-24">
+
+        <div data-reveal class="flex items-center gap-4 mb-16">
+          <p class="font-body text-sm text-ink-muted uppercase tracking-widest">About</p>
+          <span class="flex-1 border-t border-paper-dark"></span>
+          <span class="font-body text-xs text-ink-faint uppercase tracking-wider">Manila, PH</span>
+        </div>
+
+        <h1
+          data-reveal
+          class="font-display text-4xl md:text-5xl font-light text-ink mb-8"
+          style="line-height: var(--leading-tight); max-width: 20ch;"
+        >
+          I've spent six years deciding whether things follow the rules.
+        </h1>
+
+        <div data-reveal data-reveal-delay="1" style="max-width: 58ch;">
+          <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+            Five of them on healthcare claims and appeals — reading a policy against a
+            real case, deciding which way it fell, and writing the decision down well
+            enough that an auditor could follow it a year later.
+          </p>
+          <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+            The last one reviewing developer applications against platform policy.
+            Risk indicators, violations, and the part I liked most: finding the places
+            where the policy itself had a hole in it.
+          </p>
+          <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+            Then I go home and build software where the safety rules are enforced by the
+            database instead of a document — because a rule that only exists in a Terms
+            of Service is a rule motivated people ignore.
+          </p>
+          <p class="font-display text-2xl font-light text-ink mb-20" style="line-height: var(--leading-snug); font-style: italic;">
+            Those turned out to be the same job. I only noticed recently.
+          </p>
+        </div>
+
+        <!-- Timeline -->
+        <div class="mb-24">
+          <p data-reveal class="font-body text-xs text-ink-faint uppercase tracking-widest mb-10">
+            How it actually went
+          </p>
+
+          <ol class="timeline">
+            {timeline.map((n) => (
+              <li data-reveal class:list={['tl-node', `tl-node--${n.track}`]}>
+                <span class="tl-year font-body text-xs text-ink-faint">{n.year}</span>
+                <div class="tl-body">
+                  <p class="font-body text-base text-ink mb-1" style="line-height: var(--leading-snug);">
+                    {n.title}
+                  </p>
+                  {n.detail && (
+                    <p class="font-body text-sm text-ink-muted" style="line-height: var(--leading-normal); max-width: 58ch;">
+                      {n.detail}
+                    </p>
+                  )}
+                  {n.href && (
+                    <a
+                      href={n.href}
+                      class="inline-block mt-2 font-body text-sm text-accent hover:text-accent-warm transition-colors"
+                    >
+                      {n.hrefLabel} →
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <p data-reveal class="font-body text-sm text-ink-faint mt-8" style="max-width: 58ch; line-height: var(--leading-normal);">
+            The day job runs underneath all of it, including the pause. Everything from
+            February 2026 onward was built around full-time work.
+          </p>
+        </div>
+
+        <!-- The credential question, answered plainly -->
+        <div data-reveal class="mb-24 border-l-4 border-accent rounded-r-lg px-6 py-6" style="background-color: var(--color-accent-faint);">
+          <p class="font-body text-xs text-accent uppercase tracking-widest mb-3">For the record</p>
+          <p class="font-body text-base text-ink" style="line-height: var(--leading-loose); max-width: 58ch;">
+            I have a BS in Information Technology from Bestlink College of the Philippines.
+            I'm not self-taught in the romantic sense — I'm someone who studied this,
+            spent six years doing adjacent work, took two years off from building, and
+            then came back and finished things.
+          </p>
+        </div>
+
+        <!-- What I'm exploring -->
+        <div class="mb-8">
+          <p data-reveal class="font-body text-xs text-ink-faint uppercase tracking-widest mb-4">
+            What I'm working out right now
+          </p>
+          <p data-reveal class="font-body text-base text-ink-muted mb-10" style="max-width: 58ch; line-height: var(--leading-normal);">
+            Each of these has something attached to it. If I couldn't point at a thing
+            I'd made, it didn't go on the list.
+          </p>
+
+          <div class="flex flex-col gap-px bg-paper-dark border border-paper-dark rounded-lg overflow-hidden">
+            {exploring.map((e) => (
+              <a data-reveal href={e.href} class="group bg-paper px-6 py-5 hover:bg-paper-mid transition-colors">
+                <p class="font-body text-base text-ink mb-1 group-hover:text-accent transition-colors" style="line-height: var(--leading-snug);">
+                  {e.label}
+                </p>
+                <p class="font-body text-sm text-ink-muted" style="line-height: var(--leading-normal);">
+                  {e.proof} →
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Close />
+</Layout>
+
+<style>
+  .timeline {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  /* The continuous band: the day job, running under everything. */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.4rem;
+    bottom: 0.4rem;
+    width: 2px;
+    background: var(--color-paper-dark);
+  }
+  .tl-node {
+    position: relative;
+    padding-bottom: 2.25rem;
+  }
+  .tl-node:last-child {
+    padding-bottom: 0;
+  }
+  .tl-node::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 0.45rem;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    transform: translateX(-3.5px);
+    background: var(--color-paper);
+    border: 2px solid var(--color-paper-dark);
+  }
+  .tl-node--build::before {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  .tl-node--work::before {
+    background: var(--color-ink-muted);
+    border-color: var(--color-ink-muted);
+  }
+  .tl-node--pause::before {
+    background: var(--color-paper);
+    border-style: dashed;
+  }
+  .tl-node--pause .tl-body {
+    opacity: 0.75;
+  }
+  .tl-year {
+    display: block;
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (min-width: 768px) {
+    .timeline {
+      padding-left: 7.5rem;
+    }
+    .timeline::before {
+      left: 6rem;
+    }
+    .tl-node::before {
+      left: -1.5rem;
+    }
+    .tl-year {
+      position: absolute;
+      left: -7.5rem;
+      top: 0.3rem;
+      width: 5.25rem;
+      text-align: right;
+      margin-bottom: 0;
+    }
+  }
+</style>

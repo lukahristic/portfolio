@@ -1,62 +1,29 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This is a personal portfolio project. Read the context below before doing any work.
 
-## Commands
+## Read first, every session
+1. **`claude/project-memory.md`** — the compressed source of truth. Who this is, the locked strategy, brand, audience, creative direction, tech stack, and content architecture. Start here. It indexes everything else.
 
-```sh
-npm run dev        # dev server at localhost:4321
-npm run build      # production build to ./dist/
-npm run preview    # preview the production build locally
-npx astro check    # TypeScript type-check all .astro files
-```
+## Deep references (read when a task touches that area)
+- **`docs/decision-log.md`** — every decision made, with its rejected alternatives and reasons. Check before reopening a settled question.
+- **`docs/creative-direction.md`** — feeling, voice, color, type, art direction, motion rules.
+- **`docs/content-architecture.md`** — the section sequence and the purpose of each section.
+- **`docs/portfolio-sop.md`** — reusable workflows.
 
-## Stack
+## How to work on this project
+- **Documentation-first.** Before implementing anything unfamiliar (Astro APIs, libraries, deploy config), read the official docs. Avoid trial-and-error loops.
+- **Log decisions as they happen.** When a significant decision is made: update `project-memory.md`, append to `decision-log.md` (include the rejected alternative + why), and add/update an SOP if a reusable workflow emerged. Don't wait to be asked.
+- **Don't reopen settled questions.** Check the decision log first. Only revisit a rejected approach if genuinely new information justifies it — and note why.
+- **Keep memory compressed.** Prefer high-density summaries over context dumps. Carry an "open threads" list so nothing is lost between sessions.
 
-- **Astro** (static-first, single-page) + **TypeScript** (strict mode)
-- **Tailwind CSS v4** (inline `@theme` tokens in `global.css`, no `tailwind.config.*`)
-- **Lenis** for smooth scroll; no GSAP, no heavy animation libraries
-- **No React/Vue/Svelte** — all components are `.astro` files
+## Non-negotiable project rules (from the locked direction)
+- **Structure before style before motion.** Build sections/components first, then design tokens (palette + type), then visual polish, then motion. Never jump ahead to polished UI because it feels productive.
+- **Motion serves the story, never the reverse.** Test every animation: "does this make the thinking clearer, or just look cool?" Cool-only goes to the experiments lab, not the main site.
+- **Warm, confident, human, self-aware.** Restraint is the flex. The enemy is the generic intimidating dev-portfolio aesthetic.
+- **Tone is warm; content is rigorous.** Visual restraint must never mean thin technical substance.
+- **Performance is a feature.** Astro's zero-JS default protects this — keep it. Respect reduced-motion preferences.
 
-## Architecture
-
-**Single page:** `src/pages/index.astro` composes every section in narrative order:
-`Nav → Opening → ProofGlance → SpottrStudy → EcommerceStudy → Process → Lab → Close`
-
-**Layout** (`src/layouts/Layout.astro`) owns all `<head>` meta (OG, Twitter, canonical), injects the JS flag (`html.js`), and bundles the single motion script — Lenis smooth scroll, reveal-on-scroll, before/after wipe, and Spottr chapter scrollspy. All JS lives in one `<script>` block there.
-
-**Design tokens** live in `src/styles/global.css` under `@theme`. Color, type, spacing, and motion variables are all defined there. Tailwind utilities resolve against these tokens (e.g. `bg-paper`, `text-ink`, `text-accent`).
-
-**Experiments data** (`src/data/experiments.ts`) is the single source of truth for the Lab section. Add experiments there; `Lab.astro` and `ExperimentCard.astro` render from it automatically.
-
-## Motion system
-
-Every animation must pass the gate: **"does this make the thinking clearer, or just look cool?"** Cool-only → Lab section only.
-
-- **Reveals:** add `data-reveal` to any element; add `data-reveal-delay="1"` through `"4"` for stagger. CSS hides them (`html.js` flag required); IntersectionObserver adds `.is-visible`.
-- **Before/after wipe:** add `data-ba` to a figure with `.ba__before` / `.ba__after` / `.ba__handle` / `.ba__caption` children. JS adds `.ba--wipe` to upgrade from side-by-side to wipe mode.
-- **Spottr chapter marker:** add `data-beat="Label"` to section beats; `.spottr-marker [data-beat-label]` updates via scrollspy.
-- **Parallax:** CSS-only via `animation-timeline: scroll()` (progressive enhancement — only fires on `pointer: fine` + motion allowed).
-- All motion respects `prefers-reduced-motion` — never skip this check.
-
-## Content architecture
-
-Sections answer the visitor's evolving silent question in order:
-
-1. **Opening** — "who is this?"
-2. **ProofGlance** — "can they actually do anything?"
-3. **SpottrStudy** — "how do they think?" (product judgment — heart of site)
-4. **EcommerceStudy** — "how do they think?" (technical credibility)
-5. **Process** — "is this real?"
-6. **Lab** — "are they still growing?"
-7. **Close** — "what now?"
-
-**Order is load-bearing.** Don't reorder sections. Evidence before narrative; narrative before method; lab near end so it never undercuts serious work above.
-
-## Key conventions
-
-- `BASE_URL` in `Layout.astro` must be updated to the real Vercel URL before launch (currently a placeholder).
-- `section[id]` elements get `scroll-margin-top: 4rem` automatically to clear the fixed nav.
-- The `html.js` class is set synchronously in `<head>` so no-JS users never see hidden elements flash.
-- Experiment `writeupHref` is `undefined` until a write-up exists — the card shows "Write-up coming" as the fallback.
-- Spottr screenshots (`src/assets/spottr/`) are before/after pairs: `*-old.*` = original dark premium design; `*-new.*` = warm redesign. They are the centerpiece of the case study.
+## Build context
+- Stack: Astro + Tailwind CSS, deployed on Vercel.
+- This `claude/` and `docs/` documentation lives at the repo root, outside `src/`. It is project memory, not site content — do not include it in the published build.

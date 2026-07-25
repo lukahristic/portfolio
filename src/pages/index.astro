@@ -3,20 +3,30 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Opening from '../components/Opening.astro';
 import ProofGlance from '../components/ProofGlance.astro';
-import SpottrStudy from '../components/SpottrStudy.astro';
-import EcommerceStudy from '../components/EcommerceStudy.astro';
-import Process from '../components/Process.astro';
 import Lab from '../components/Lab.astro';
+import Colophon from '../components/Colophon.astro';
 import Close from '../components/Close.astro';
 ---
 
-<Layout title="Wency — Product Builder">
+<Layout title="Wency Valentin — Product Builder">
+  {/*
+    Legacy anchors: the case studies used to live on this page as #spottr and
+    #ecommerce. Those links are out in the world (applications, messages), so
+    forward them rather than dropping people on the homepage. Inline + first,
+    so it runs before paint instead of after the bundle loads.
+  */}
+  <script is:inline>
+    (function () {
+      var moved = { '#spottr': '/work/spottr', '#ecommerce': '/work/motorshop' };
+      var to = moved[window.location.hash];
+      if (to) window.location.replace(to);
+    })();
+  </script>
+
   <Nav />
   <Opening />
   <ProofGlance />
-  <SpottrStudy />
-  <EcommerceStudy />
-  <Process />
   <Lab />
+  <Colophon />
   <Close />
 </Layout>

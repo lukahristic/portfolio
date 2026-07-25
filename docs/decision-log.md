@@ -148,6 +148,54 @@
 - **Pending (manual):** Create og-image.png from the spec at public/og-image-SPEC.txt and save it to public/og-image.png.
 - **Status:** Code complete. Image and URL are pending pre-launch items.
 
+### D-025 | Redesign | Diagnosis — the site was assertion without artifact
+- **Decision:** Treat "zero outbound links" as the site's defining defect, not its age. Every claim gets something a reader can open.
+- **Why:** The live site made strong claims ("production software," "shipped," "architected deliberately") and provided no repo, no demo, no app. Narrative weight was inverted: ~250 lines of prose on the unverifiable project (Spottr), four generic bullets on the verifiable one (MotorShop, 57 commits, live, with published demo credentials). To a skeptic that is indistinguishable from the failure the site tries to preempt.
+- **Rejected:** "The portfolio is outdated, start over." It was six weeks old and the Spottr writing is the best asset in the project. Rebuilding would have destroyed the strongest material to fix a problem it didn't have.
+- **Status:** Locked.
+
+### D-026 | Architecture | Multi-page routing
+- **Decision:** Split to `/`, `/work/spottr`, `/work/motorshop`, `/about`, `/decisions`. Each carries its own title, description, and canonical.
+- **Why:** Applications take one URL. A single page gives a backend role and a product role the identical scroll, can't be tailored per application, and can't be indexed per project. `/#ecommerce` does none of what `/work/motorshop` does.
+- **Legacy:** `/#spottr` and `/#ecommerce` are already out in the world and hash fragments never reach the server, so a config redirect cannot catch them. An inline pre-paint script forwards them.
+- **Note:** Partially reverses D-023's single-page assumption. The question-ordering itself survives — it now orders the homepage and the sequence of doors.
+- **Status:** Locked.
+
+### D-027 | Content | Process section deleted
+- **Decision:** Remove the four numbered principles (plan first, read docs, engineer prompts, direct don't defer). Keep only the "this portfolio was built the same way" note, as a colophon linking `/decisions`.
+- **Why:** It was the most generic content on the site — every AI-forward developer writes those four bullets — and it violated D-020 by claiming qualities instead of showing artifacts. The Spottr case study already demonstrates all four by example.
+- **Rejected:** Keeping it "because process is the differentiator." Process is the differentiator; a list of process adjectives is not process.
+- **Status:** Locked.
+
+### D-028 | Positioning | Hero returns to judgment-first; AI is no longer the headline
+- **Decision:** Hero is now "Six years deciding whether things follow the rules." Descriptor is "Product-minded full-stack developer." AI is described where it's relevant, not in the first line.
+- **Why:** The June hero ("I direct AI to ship production software") **contradicted D-001** — the locked decision to position as a product builder, *not* "a developer who uses AI" — and it was changed in an unlogged session. By 2026 "I use AI well" is a commodity claim and a negative filter for some readers.
+- **Status:** Locked. Restores D-001.
+
+### D-029 | Content | MotorShop promoted to a full case study, framed honestly
+- **Decision:** Own page, live demo and published demo credentials above the prose, plus the real decisions: fitment as a join table, hand-written bcrypt/JWT/HTTP-only-cookie auth, identical login errors to prevent user enumeration, guards at the middleware. Stated plainly that nobody uses it and it has no customers.
+- **Why:** It is the only verifiable artifact in the portfolio, and the honest framing is stronger than either overclaiming or dismissing it. "This is a learning build" followed by real rigor beats both.
+- **Lesson applied:** L-02 fired again live — it was described in-session as "just my project to learn more about tech stacks."
+- **Status:** Locked.
+
+### D-030 | Build | Lab render bug — four experiments were invisible
+- **Decision:** Render every experiment in full, newest first, with dates. Descriptions are always visible; only the insight expands.
+- **Why:** `Lab.astro` rendered only `title` + `tech` for non-featured entries, so the RLS security audit and the photo-upload three-architecture debug — the two strongest technical artifacts in the project — reached the page as bare titles while their write-ups sat unused in `experiments.ts`. Hiding the best evidence behind a click is still hiding it.
+- **Status:** Locked.
+
+### D-031 | Publishing | `/decisions` is a curated rewrite, never the raw log
+- **Decision:** Publish 9 craft and engineering decisions in first person, each naming a real rejected alternative. This file stays private.
+- **Why:** This log is internal strategy in the third person. It contains "he cannot walk through every line of code," "he systematically UNDERSELLS technical work," and "peers are a mirror of his insecurity." Publishing that hands a hiring manager a candid inventory of weaknesses and reads as calculating. The signal worth sending is "I decide deliberately and record what I rejected" — the technical decisions carry that without the exposure.
+- **Rejected:** Publishing verbatim for authenticity. Authenticity is not the same as publishing your own private assessment.
+- **Status:** Locked.
+
+### D-032 | Positioning | The day job and the degree go on the site
+- **Decision:** `/about` is spined on a timeline running 2020 → now, with the Accenture job as a continuous band beneath everything including the 2024–25 pause. States the BS in Information Technology plainly. Confidential client is never named.
+- **Why — correction:** Project memory had assumed self-taught with no formal credential. **He holds a BS in Information Technology (Bestlink College of the Philippines),** and the positioning had been defending against a weakness that did not exist.
+- **Why — the real find:** His current role (~1 yr) is reviewing **developer applications against platform policy** — risk indicators, violations, and identifying policy gaps. The origin story is therefore not an analogy: he assesses whether other people's software follows the rules, then builds apps where the rules are database constraints rather than policy text. Finding `USING(true)` granted to `anon` in his own schema is that same review turned on himself.
+- **On the pause:** shown, not hidden — it is already visible in the contribution graph (Dec 2023 → Feb 2026). Shown deliberately it becomes the control group for the tooling argument: same person, same job, different output.
+- **Status:** Locked.
+
 ---
 
 ## Lessons / Patterns (reusable)
@@ -155,3 +203,5 @@
 - L-02: He undersells technical accomplishments. Actively re-frame and surface them.
 - L-03: When a stated INTEREST conflicts with GOALS, separate the impulse from the vehicle. The impulse is often right (storytelling/immersion); the vehicle is often the trap (decorative parallax). Validate the impulse, redirect the vehicle. Don't just say no.
 - L-04: Reusable test for any aesthetic/motion choice: "Does this make the thinking clearer, or just look cool?" Clearer stays; cool-only is quarantined.
+- L-05: **Read the actual source documents before writing positioning.** The résumé and the public GitHub both contained facts the strategy docs had guessed wrong — a degree assumed absent, an employer never named, a current role that turned the whole origin story from analogy into fact, and 226 commits on a project the site implied was small. Discovery interviews capture what someone *says* about themselves; the artifacts capture what is true. Read both.
+- L-06: L-02 (underselling) is not a historical note — it recurs live and needs catching in the moment. It surfaced twice in one session: "just my project to learn more about tech stacks," and a résumé describing six years at a global consultancy as if it were irrelevant to software.

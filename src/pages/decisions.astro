@@ -1,0 +1,99 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Close from '../components/Close.astro';
+import { decisions } from '../data/decisions';
+---
+
+<Layout
+  title="Decisions — Wency Valentin"
+  description="The calls I made building this site and the alternatives I turned down, with reasons. A decision with no rejected option is just a description."
+>
+  <Nav />
+
+  <main id="top" class="pt-16">
+    <section class="bg-paper">
+      <div class="max-w-4xl mx-auto px-6 py-24">
+
+        <div data-reveal class="flex items-center gap-4 mb-16">
+          <p class="font-body text-sm text-ink-muted uppercase tracking-widest">Decision log</p>
+          <span class="flex-1 border-t border-paper-dark"></span>
+          <span class="font-body text-xs text-ink-faint uppercase tracking-wider">{decisions.length} entries</span>
+        </div>
+
+        <h1
+          data-reveal
+          class="font-display text-4xl md:text-5xl font-light text-ink mb-6"
+          style="line-height: var(--leading-tight);"
+        >
+          What I chose, and what I turned down.
+        </h1>
+
+        <p
+          data-reveal
+          data-reveal-delay="1"
+          class="font-body text-lg text-ink-muted mb-4"
+          style="max-width: 56ch; line-height: var(--leading-normal);"
+        >
+          Most portfolios list what someone used. That tells you nothing — the
+          interesting half of any decision is the option that got rejected, and why.
+        </p>
+
+        <p
+          data-reveal
+          data-reveal-delay="2"
+          class="font-body text-lg text-ink-muted mb-20"
+          style="max-width: 56ch; line-height: var(--leading-normal);"
+        >
+          So each entry below names the alternative. Several of them are things I
+          wanted to use and didn't.
+        </p>
+
+        <div class="flex flex-col gap-4">
+          {decisions.map((d) => (
+            <article
+              data-reveal
+              class="border border-paper-dark rounded-lg overflow-hidden"
+              style="border-left-width: 3px; border-left-color: var(--color-accent);"
+            >
+              <div class="px-6 py-6 md:px-8 md:py-7">
+                <div class="flex items-baseline justify-between gap-4 mb-3">
+                  <h2
+                    class="font-display text-xl md:text-2xl font-light text-ink"
+                    style="line-height: var(--leading-snug);"
+                  >
+                    {d.title}
+                  </h2>
+                  <span class="font-body text-xs text-ink-faint uppercase tracking-wider shrink-0">
+                    {d.area}
+                  </span>
+                </div>
+
+                <p class="font-body text-base text-ink mb-5" style="line-height: var(--leading-normal);">
+                  {d.decision}
+                </p>
+
+                <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-2">Why</p>
+                <p class="font-body text-sm text-ink-muted mb-6" style="line-height: var(--leading-normal);">
+                  {d.why}
+                </p>
+
+                <div class="pt-5 border-t border-paper-dark">
+                  <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-2">
+                    What I rejected
+                  </p>
+                  <p class="font-body text-sm text-ink-muted" style="line-height: var(--leading-normal);">
+                    {d.rejected}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <Close />
+</Layout>

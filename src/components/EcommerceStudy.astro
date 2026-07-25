@@ -1,9 +1,28 @@
 ---
+const DEMO_URL = "https://motorshop-sepia-omega.vercel.app/";
+const REPO_URL = "https://github.com/lukahristic/motor-shop";
+
 const signals = [
-  { label: "Auth & authorization", detail: "Users, roles, protected routes — not tutorial-level auth, but a real access model." },
-  { label: "Docker Postgres", detail: "Local dev isolated in a container. No more 'works on my machine' database drift." },
-  { label: "TypeScript throughout", detail: "The type system as a forcing function for clarity, not an afterthought." },
-  { label: "Vercel deploy pipeline", detail: "A working CI path from commit to live — because shipping is the point." },
+  {
+    label: "Fitment is a relationship, not a field",
+    detail:
+      "A part doesn't belong to one bike — it fits many, and each bike takes many parts. That's a join table, not a column. Year, Make, and Model chain into each other, and the results only show parts that actually fit.",
+  },
+  {
+    label: "Auth written by hand, on purpose",
+    detail:
+      "bcrypt for hashing, JWT in an HTTP-only cookie so JavaScript can't read it. I skipped the drop-in auth library because I wanted to understand the session, not configure one.",
+  },
+  {
+    label: "Wrong email and wrong password say the same thing",
+    detail:
+      "Different error messages let anyone check which emails have accounts. One message for both, so the login form doesn't leak the user list.",
+  },
+  {
+    label: "Guards at the middleware, not the UI",
+    detail:
+      "Admin routes and mutation endpoints are blocked before they render. Hiding a button is not access control — the check has to sit where the request arrives.",
+  },
 ];
 ---
 
@@ -18,31 +37,91 @@ const signals = [
     </div>
 
     <h2 data-reveal class="font-display text-5xl md:text-6xl font-light text-ink mb-4" style="line-height: var(--leading-tight);">
-      Ecommerce Platform
+      MotorShop
     </h2>
-    <p data-reveal data-reveal-delay="1" class="font-display text-2xl font-light text-ink-muted mb-20" style="font-style: italic;">
-      Built to prove I understand how real apps are assembled.
+    <p data-reveal data-reveal-delay="1" class="font-display text-2xl font-light text-ink-muted mb-16" style="font-style: italic;">
+      A parts store has to know what fits what.
     </p>
 
-    <!-- Honest framing -->
+    <!-- Live demo — the whole point -->
+    <div
+      data-reveal
+      class="mb-16 border border-paper-dark rounded-lg overflow-hidden"
+      style="border-left-width: 3px; border-left-color: var(--color-accent);"
+    >
+      <div class="px-6 py-6">
+        <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">
+          Running right now
+        </p>
+        <p class="font-body text-base text-ink mb-5" style="line-height: var(--leading-normal);">
+          Don't take my word for any of this — sign in as an administrator and look around.
+        </p>
+
+        <div class="flex flex-wrap gap-x-6 gap-y-2 mb-5">
+          <a
+            href={DEMO_URL}
+            target="_blank"
+            rel="noopener"
+            class="font-body text-sm text-accent hover:text-accent-warm transition-colors"
+          >
+            Open the live store →
+          </a>
+          <a
+            href={REPO_URL}
+            target="_blank"
+            rel="noopener"
+            class="font-body text-sm text-accent hover:text-accent-warm transition-colors"
+          >
+            Read the source →
+          </a>
+        </div>
+
+        <div class="pt-4 border-t border-paper-dark">
+          <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">
+            Demo accounts
+          </p>
+          <dl class="font-body text-sm text-ink-muted flex flex-wrap gap-x-10 gap-y-2">
+            <div>
+              <dt class="text-ink-faint text-xs mb-0.5">Admin</dt>
+              <dd>admin@motorshop.com · password123</dd>
+            </div>
+            <div>
+              <dt class="text-ink-faint text-xs mb-0.5">Customer</dt>
+              <dd>user@motorshop.com · password123</dd>
+            </div>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <!-- Framing -->
     <div data-reveal class="mb-16">
       <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
-        This project exists to answer one question: can I assemble a real
-        application correctly? Auth, typed code end-to-end, a containerised
-        local database, and a working deploy pipeline — each technology chosen
-        deliberately, not copied from a tutorial.
+        Most shop tutorials treat a product as a thing with a price. A motorcycle
+        parts store can't. A brake lever fits some bikes and not others, and
+        selling someone a part that doesn't fit their machine is the one mistake
+        the whole store exists to prevent.
+      </p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        So the interesting work wasn't the checkout. It was the modelling —
+        and then building the boring parts correctly around it: real
+        authentication, real access control, a database that runs the same
+        locally as it does in production.
       </p>
 
       <p class="font-body text-lg text-ink" style="line-height: var(--leading-loose);">
-        The answer is: yes — and here's the architecture. Auth, a proper local dev setup,
-        typed code end-to-end, and a real deploy pipeline. Every technology choice has a reason.
-        That's what this project documents.
+        To be clear about what this is: nobody uses it. It has no customers and
+        was never meant to — it's the project where I worked out how the pieces
+        fit together. The store is pretend. The authentication, the access
+        control, and the data model are not, and those are the parts I'd defend
+        in a review.
       </p>
     </div>
 
     <!-- Engineering signals -->
     <div class="mb-16">
-      <p data-reveal class="font-body text-xs text-ink-faint uppercase tracking-widest mb-8">What's in it</p>
+      <p data-reveal class="font-body text-xs text-ink-faint uppercase tracking-widest mb-8">The decisions worth defending</p>
 
       <div class="grid gap-px bg-paper-dark border border-paper-dark rounded-lg overflow-hidden">
         {signals.map((s, i) => (
@@ -54,12 +133,23 @@ const signals = [
       </div>
     </div>
 
+    <!-- Environment parity -->
+    <div data-reveal class="mb-16">
+      <p class="font-body text-lg text-ink" style="line-height: var(--leading-loose);">
+        Local development runs Postgres in Docker; production runs it on Neon.
+        Same engine, same migrations, one Prisma schema — so "works on my machine"
+        stops being a category of bug. That was a cost decision as much as a
+        technical one: managed Postgres for a portfolio project is worth the
+        money, self-hosting it isn't.
+      </p>
+    </div>
+
     <!-- Stack + status -->
     <div data-reveal class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-8 border-t border-paper-dark">
       <div>
         <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">Stack</p>
         <div class="flex flex-wrap gap-2">
-          {["TypeScript", "Next.js", "Docker", "Postgres", "Vercel"].map((tech) => (
+          {["Next.js 15", "TypeScript", "Prisma", "Postgres", "Docker", "Vercel"].map((tech) => (
             <span class="font-body text-xs text-ink-muted border border-paper-dark px-2 py-1 rounded">
               {tech}
             </span>
@@ -68,7 +158,7 @@ const signals = [
       </div>
       <div>
         <span class="font-body text-xs text-ink-muted uppercase tracking-wider bg-paper-dark px-3 py-1 rounded-full">
-          Shipped
+          Live demo
         </span>
       </div>
     </div>

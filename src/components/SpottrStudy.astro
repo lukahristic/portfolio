@@ -216,7 +216,7 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
         <div class="arch-row" data-expanded="false" style="border-bottom: 1px solid var(--color-paper-dark);">
           <button class="arch-toggle w-full text-left px-5 py-4 flex items-center gap-4" aria-expanded="false" aria-controls="arch-detail-admin">
             <span class="font-body text-sm font-medium text-ink flex-shrink-0" style="min-width: 6.5rem;">Admin Portal</span>
-            <span class="font-body text-sm text-ink-muted" style="flex: 1;">Next.js 14 · Vercel · SSR auth</span>
+            <span class="font-body text-sm text-ink-muted" style="flex: 1;">Next.js 16 · Vercel · SSR auth</span>
             <span class="card-expand-icon" aria-hidden="true">+</span>
           </button>
           <div class="card-expandable" id="arch-detail-admin">
@@ -225,7 +225,7 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
             </div>
           </div>
         </div>
-        <div class="arch-row" data-expanded="false">
+        <div class="arch-row" data-expanded="false" style="border-bottom: 1px solid var(--color-paper-dark);">
           <button class="arch-toggle w-full text-left px-5 py-4 flex items-center gap-4" aria-expanded="false" aria-controls="arch-detail-backend">
             <span class="font-body text-sm font-medium text-ink flex-shrink-0" style="min-width: 6.5rem;">Backend</span>
             <span class="font-body text-sm text-ink-muted" style="flex: 1;">Postgres · RLS · Realtime · Edge Functions · pg_cron</span>
@@ -234,6 +234,18 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
           <div class="card-expandable" id="arch-detail-backend">
             <div class="card-inner">
               <p class="font-body text-sm text-ink-faint px-5 pb-4" style="line-height: var(--leading-normal);">JWT auth, row-level security on all tables, WebSocket live updates, Deno serverless functions, scheduled cleanup jobs</p>
+            </div>
+          </div>
+        </div>
+        <div class="arch-row" data-expanded="false">
+          <button class="arch-toggle w-full text-left px-5 py-4 flex items-center gap-4" aria-expanded="false" aria-controls="arch-detail-launch">
+            <span class="font-body text-sm font-medium text-ink flex-shrink-0" style="min-width: 6.5rem;">Launch surface</span>
+            <span class="font-body text-sm text-ink-muted" style="flex: 1;">Next.js site · EAS Build</span>
+            <span class="card-expand-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="card-expandable" id="arch-detail-launch">
+            <div class="card-inner">
+              <p class="font-body text-sm text-ink-faint px-5 pb-4" style="line-height: var(--leading-normal);">Marketing site and store listing assets, with native builds produced through EAS rather than a local toolchain</p>
             </div>
           </div>
         </div>
@@ -251,12 +263,38 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
       </div>
     </div>
 
+    <!-- Source -->
+    <div
+      data-reveal
+      class="mb-16 border border-paper-dark rounded-lg overflow-hidden"
+      style="border-left-width: 3px; border-left-color: var(--color-accent);"
+    >
+      <div class="px-6 py-6">
+        <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">
+          The whole thing is readable
+        </p>
+        <p class="font-body text-base text-ink mb-5" style="line-height: var(--leading-normal);">
+          226 commits across the app, the admin portal, the marketing site, and the
+          Supabase migrations — including the RLS policies and the security audit that
+          rewrote them.
+        </p>
+        <a
+          href="https://github.com/lukahristic/spottr"
+          target="_blank"
+          rel="noopener"
+          class="font-body text-sm text-accent hover:text-accent-warm transition-colors"
+        >
+          Read the source →
+        </a>
+      </div>
+    </div>
+
     <!-- Stack + status -->
     <div data-reveal class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-8 border-t border-paper-dark">
       <div>
         <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">Stack</p>
         <div class="flex flex-wrap gap-2">
-          {["React Native", "Expo", "Supabase"].map((tech) => (
+          {["React Native", "Expo", "Supabase", "Postgres", "Next.js"].map((tech) => (
             <span class="font-body text-xs text-ink-muted border border-paper-dark px-2 py-1 rounded">
               {tech}
             </span>
@@ -265,8 +303,11 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
       </div>
       <div class="text-right">
         <span class="font-body text-xs text-accent uppercase tracking-wider bg-accent-faint px-3 py-1 rounded-full">
-          Beta · Launching soon
+          Private beta
         </span>
+        <p class="font-body text-xs text-ink-faint mt-2">
+          Updated July 2026 — in gym conversations before store launch
+        </p>
       </div>
     </div>
 
