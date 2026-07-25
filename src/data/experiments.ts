@@ -19,6 +19,18 @@ export interface Experiment {
  */
 export const experiments: Experiment[] = [
   {
+    id: 'notebooklm-dev-environment',
+    title: 'NotebookLM as a development environment',
+    status: 'complete',
+    description:
+      'Loaded project documentation, Google Apps Script source, and spreadsheet structures into NotebookLM as sources rather than prompting it cold — so it could produce implementation plans, evaluate proposed changes against the system that already existed, and hold versioned design notes across weeks of work. Taught the same method to SMEs, Team Leads, and Managers at handover.',
+    tech: ['NotebookLM', 'Google Apps Script', 'Prompt engineering', 'Context engineering'],
+    insight:
+      'A model with your project loaded is a different tool from the same model asked a question cold. Most of the quality gap people attribute to prompt wording is really context that was or wasn\'t there.',
+    date: '2026-07',
+    featured: true,
+  },
+  {
     id: 'llm-project-memory',
     title: 'LLM context engineering',
     status: 'complete',

@@ -196,6 +196,25 @@
 - **On the pause:** shown, not hidden — it is already visible in the contribution graph (Dec 2023 → Feb 2026). Shown deliberately it becomes the control group for the tooling argument: same person, same job, different output.
 - **Status:** Locked.
 
+### D-033 | Content | Third case study — the work built for other people
+- **Decision:** `/work/knowledge-exchange` gets a full case study, and the homepage gets a separate **"At work"** band beneath the two-up grid rather than a third card in it.
+- **Why:** every other project on the site was built for himself. Spottr has no public users; MotorShop explicitly has none. The Knowledge Exchange Platform was built for a review team and the trainers supporting it, endorsed by management, and designed with an admin portal so SMEs and Team Leads could maintain it without him. That third narrative leg — *builds for other people, gets adoption, designs for succession* — is the one the portfolio was missing, and it also supplies the third-party validation the earlier audit flagged as absent.
+- **Why a separate band, not a third card:** the two existing cards promise something clickable. This one cannot be linked. A matching card that delivers prose instead would break the pattern the redesign had just established. Grouping by kind is more honest than flattening personal builds and work-for-a-team into one row.
+- **Rejected:** burying it as bullets on `/about` or in the résumé only. It is the strongest evidence of professional judgment in the project and would have been the least visible.
+- **Status:** Locked.
+
+### D-034 | Content | State the missing link instead of working around it
+- **Decision:** The case study says near the top that there is no repo, no demo, and no screenshots, and why — company systems, confidential client, code not his to publish. The client is never named.
+- **Why:** the site's whole thesis is that claims come attached to artifacts. Publishing an unlinked case study without acknowledging the exception would quietly undercut that. Naming the constraint instead converts it into a signal: for someone who spent six years handling confidential data under NDA, visibly knowing where the line sits is professional competence, not an apology.
+- **Compensating artifacts:** an architecture diagram (his own design work, no company IP) and the NotebookLM method published as a Lab entry (his own method, and what he actually taught the team). Dummy screenshots rejected — real effort for a screenshot of a spreadsheet, which persuades nobody.
+- **Note:** the diagram is HTML boxes, not SVG. An SVG `viewBox` scales its text down with the canvas and becomes unreadable on a phone. Zero JS either way, so the motion budget is untouched.
+- **Status:** Locked.
+
+### D-035 | Positioning | Employment dates are accurate; the departure is not narrated
+- **Decision:** Accenture dates become 2020–2025 and 2025–2026. The `/about` day-job band moves to past tense. "Available immediately" appears in the résumé contact line and the site footer. No reason for leaving appears anywhere.
+- **Why:** he asked that leaving not be mentioned, and separately that availability be stated. Those collide only on the résumé, which was printing "2025 – Present" for a role that ended 17 July 2026 — a false claim on the one document recruiters verify. Splitting the two resolves it: don't tell the story (honoured in full), don't print a false date (non-negotiable). Résumés never explain departures, so an end date with no comment is unremarkable.
+- **Status:** Locked.
+
 ---
 
 ## Lessons / Patterns (reusable)

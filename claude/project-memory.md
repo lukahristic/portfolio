@@ -6,9 +6,10 @@
 ## WHO (the person)
 - **Wency Valentin.** Manila, PH. Targeting remote-first.
 - **Has a BS in Information Technology** (Bestlink College of the Philippines). ⚠️ Earlier memory assumed "self-taught, no formal credential" — that was WRONG and it was shaping the positioning defensively. Corrected 2026-07-25 from his résumé.
-- **6+ years at Accenture (2020–present), non-tech:**
+- **6 years at Accenture (2020 – 17 July 2026), non-tech. Left; now building full-time and available immediately.** The departure is deliberately NOT narrated anywhere on the site — dates only, no reason (D-035).
   - ~5 yrs Healthcare Claims & Appeals — claims, appeals, case analysis, discrepancy detection, audit-ready documentation, confidential data handling.
-  - ~1 yr current: **Content Moderator, Developer Applications** — reviews developer submissions against platform policy: risk indicators, violations, and *identifying policy gaps*. **Client is confidential and must never be named publicly.**
+  - ~1 yr Content Moderator, **Developer Applications** — reviewed developer submissions against platform policy: risk indicators, violations, and *identifying policy gaps*. **Client is confidential and must never be named publicly.**
+  - **Built two internal systems there in his own time** (Jun–Jul 2026), presented to SMEs/Leads/Managers on his last day: a **Knowledge Exchange Platform** (Google Apps Script + Sheets, with an admin portal so it would survive his departure) and a **Review Annotation Generator**. Used NotebookLM as a development environment, and taught the method. This is the only work on the site built *for other people* — see `/work/knowledge-exchange` and D-033/D-034.
 - **Why that matters:** the origin story is not an analogy. He judges whether other people's software follows the rules for a living, then builds apps where the rules are database constraints rather than policy text. The RLS audit (finding `USING(true)` granted to `anon` in his own schema) is that same review turned on himself.
 - Learned web dev starting **2022**, stalled through 2024–25, returned **Feb 2026** with AI tooling. The pause is visible in his contribution graph and is shown deliberately on `/about` — same person, same job, different output.
 - Working method is deliberate, NOT careless: plans prompts, uses **plan mode**, **reads docs before implementing**. Directed AI building, not blind acceptance.
@@ -80,7 +81,9 @@
 - **Signature (D-021):** transparently "built with AI, here's how" — medium = message.
 
 ## CONTENT ARCHITECTURE (rebuilt 2026-07-25 — D-026, supersedes the single-page form of D-023)
-- **5 routes:** `/` · `/work/spottr` · `/work/motorshop` · `/about` · `/decisions`. Each has its own title/description/canonical so a project URL can go in an application.
+- **7 routes:** `/` · `/work/spottr` · `/work/motorshop` · `/work/knowledge-exchange` · `/about` · `/decisions` · `/resume`. Each has its own title/description/canonical so a project URL can go in an application.
+- Three case studies, three narrative roles: Spottr = product thinking · MotorShop = technical structure · Knowledge Exchange = **builds for other people, gets adoption, designs for succession**.
+- Résumé is `src/pages/resume.astro`; the PDF is printed from it by `npm run resume`. **Never hand-edit `public/resume.pdf`** — it drifts and then the site and the résumé disagree.
 - `/` = hero → ProofGlance (two doors) → Lab → colophon → close. Question-ordering survives; it now orders the homepage and the sequence of doors.
 - `/about` is spined on a **timeline** (2020 → now), day job as a continuous band under everything including the pause. Ends with "what I'm working out right now" — every line linked to an artifact, no adjectives.
 - `/decisions` is a **curated first-person rewrite** (`src/data/decisions.ts`). `docs/decision-log.md` stays private — see D-031.
