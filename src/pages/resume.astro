@@ -1,0 +1,286 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+/*
+ * Single source of truth for the résumé.
+ *
+ * The PDF at /resume.pdf is printed from this page with headless Chrome:
+ *   npm run resume
+ * Edit here, re-run, commit both. Never edit the PDF directly — it drifts.
+ *
+ * No data-reveal anywhere on this page: reveal CSS hides elements until JS
+ * runs, and a print job must never depend on that.
+ */
+
+const projects = [
+  {
+    name: 'Spottr',
+    kind: 'Gym community app',
+    stack: 'React Native · Expo · Supabase · PostgreSQL · Next.js',
+    links: ['github.com/lukahristic/spottr'],
+    lede:
+      'A real-time social layer for gyms: co-present members signal openness and exchange one introductory message, solving the mutual hesitation that stops gym-goers connecting.',
+    bullets: [
+      'Caught that the original status feature forced users to publicly declare their experience level — the exact anxiety the app exists to remove. Rebuilt it around mood, with willingness to talk as a separate opt-in toggle.',
+      'Encoded safety at the database layer rather than in application code: blocks enforced by row-level security so blocked users return nothing, and the one-introduction limit as a UNIQUE constraint.',
+      'Audited my own production schema and found permissive RLS policies granted to the anonymous role, exposing every gym’s roster and allowing forged check-ins. Rewrote policies across all affected tables.',
+      'Architected four coordinated systems: React Native app, Next.js admin portal with role-scoped views, marketing site, and a Supabase backend with Edge Functions and scheduled jobs.',
+      'Built GPS-verified check-in (proximity only, never stored), realtime presence, push notifications, automated checkout, and a scheduled data-retention policy.',
+      '226 commits. Currently in private beta and in conversations with gyms.',
+    ],
+  },
+  {
+    name: 'MotorShop',
+    kind: 'E-commerce platform',
+    stack: 'Next.js · TypeScript · Prisma · PostgreSQL · Docker · Vercel',
+    links: ['motorshop-sepia-omega.vercel.app', 'github.com/lukahristic/motor-shop'],
+    lede:
+      'A motorcycle parts store built as a deliberate exercise in assembling a real application correctly. Deployed, with demo accounts published in the repository.',
+    bullets: [
+      'Modelled vehicle fitment as a many-to-many relationship — Year/Make/Model resolving through a compatibility join table — so results only show parts that fit the selected bike.',
+      'Wrote authentication by hand rather than adopting a drop-in library: bcrypt hashing, JWT in HTTP-only cookies, and role-based middleware guarding admin routes and mutation endpoints.',
+      'Returned identical responses for wrong email and wrong password, so the login form cannot be used to enumerate registered accounts.',
+      'Ran containerised Postgres locally against managed Postgres in production from one Prisma schema, keeping environments honest.',
+    ],
+  },
+];
+
+const experience = [
+  {
+    role: 'Content Moderation Specialist — Developer Applications',
+    org: 'Accenture',
+    dates: '2025 – Present',
+    bullets: [
+      'Review developer application submissions against platform policy, assessing risk indicators, policy violations, and submission accuracy to support approval and rejection decisions.',
+      'Identify unclear submissions and gaps in the policy itself, feeding quality improvement.',
+      'Apply consistent judgment to sensitive, high-impact content under strict confidentiality and data-protection standards.',
+    ],
+  },
+  {
+    role: 'Healthcare Claims & Appeals Processor',
+    org: 'Accenture',
+    dates: '2020 – 2025',
+    bullets: [
+      'Processed medical insurance claims and handled provider and customer appeals against client policy, contractual agreements, and regulatory guidelines.',
+      'Performed case analysis on medical documentation to identify discrepancies, coverage issues, and billing errors.',
+      'Documented decisions to an audit-ready standard while meeting strict accuracy and productivity targets on high-volume workloads.',
+    ],
+  },
+];
+
+const skills = [
+  ['Languages', 'TypeScript, JavaScript, SQL'],
+  ['Frontend', 'React, React Native (Expo), Next.js, Astro'],
+  ['Backend & data', 'PostgreSQL, Supabase, Prisma, Row Level Security, REST APIs, authentication'],
+  ['Tooling', 'Docker, Git, Vercel, EAS Build'],
+  ['AI-assisted workflow', 'Claude Code, prompt engineering, documentation-first development'],
+];
+---
+
+<Layout
+  title="Résumé — Wency Valentin"
+  description="Full-stack developer in Manila. Six years at Accenture in claims and developer-application review; now building software where the rules are enforced by the database."
+>
+  <div class="screen-only no-print">
+    <a href="/">← Back to the site</a>
+    <a href="/resume.pdf" download>Download PDF ↓</a>
+  </div>
+
+  <main class="cv">
+
+    <header class="cv-head">
+      <h1>Wency Valentin</h1>
+      <p class="cv-title">Product-minded Full-Stack Developer</p>
+      <p class="cv-contact">
+        Manila, Philippines · Open to remote ·
+        wency19valentin@gmail.com<br />
+        portfolio-wency.vercel.app · github.com/lukahristic ·
+        linkedin.com/in/wency-valentin-33ab72274
+      </p>
+    </header>
+
+    <section class="cv-section">
+      <p class="cv-summary">
+        Six years deciding whether things follow the rules — five on healthcare claims
+        and appeals, the last reviewing developer applications against platform policy.
+        I now build software where those rules are enforced by the database rather than
+        by a policy document. I plan before I build, read the documentation before I
+        implement, and treat AI output as a first draft that needs direction. Both
+        projects below are public; one is deployed with a login you can use.
+      </p>
+    </section>
+
+    <section class="cv-section">
+      <h2>Projects</h2>
+      {projects.map((p) => (
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3>{p.name} <span class="cv-kind">— {p.kind}</span></h3>
+          </div>
+          <p class="cv-meta">{p.stack}</p>
+          <p class="cv-meta cv-links">{p.links.join(' · ')}</p>
+          <p class="cv-lede">{p.lede}</p>
+          <ul>
+            {p.bullets.map((b) => <li>{b}</li>)}
+          </ul>
+        </article>
+      ))}
+    </section>
+
+    <section class="cv-section">
+      <h2>Experience</h2>
+      {experience.map((e) => (
+        <article class="cv-entry">
+          <div class="cv-entry-head">
+            <h3>{e.role}</h3>
+            <span class="cv-dates">{e.dates}</span>
+          </div>
+          <p class="cv-meta">{e.org}</p>
+          <ul>
+            {e.bullets.map((b) => <li>{b}</li>)}
+          </ul>
+        </article>
+      ))}
+    </section>
+
+    <section class="cv-section">
+      <h2>Education</h2>
+      <article class="cv-entry">
+        <div class="cv-entry-head">
+          <h3>BS Information Technology</h3>
+        </div>
+        <p class="cv-meta">Bestlink College of the Philippines</p>
+      </article>
+    </section>
+
+    <section class="cv-section cv-skills">
+      <h2>Technical skills</h2>
+      <dl>
+        {skills.map(([label, value]) => (
+          <div class="cv-skill-row">
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+  </main>
+</Layout>
+
+<style is:global>
+  .screen-only {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 0;
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+  }
+  .screen-only a { color: var(--color-accent); }
+
+  .cv {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 4rem;
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .cv-head { margin-bottom: 1.5rem; }
+  .cv-head h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 2rem;
+    line-height: 1.1;
+    margin-bottom: 0.15rem;
+  }
+  .cv-title {
+    font-size: 0.95rem;
+    color: var(--color-ink-muted);
+    margin-bottom: 0.5rem;
+  }
+  .cv-contact {
+    font-size: 0.8rem;
+    color: var(--color-ink-muted);
+    line-height: 1.55;
+  }
+
+  .cv-section { margin-bottom: 1.5rem; }
+  .cv-section h2 {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--color-ink-faint);
+    border-bottom: 1px solid var(--color-paper-dark);
+    padding-bottom: 0.3rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .cv-summary { line-height: 1.6; }
+
+  .cv-entry { margin-bottom: 1.15rem; break-inside: avoid; page-break-inside: avoid; }
+  .cv-entry:last-child { margin-bottom: 0; }
+  .cv-entry-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+  .cv-entry h3 {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  .cv-kind { font-weight: 400; color: var(--color-ink-muted); font-size: 0.95rem; }
+  .cv-dates { font-size: 0.78rem; color: var(--color-ink-faint); white-space: nowrap; }
+  .cv-meta { font-size: 0.78rem; color: var(--color-ink-muted); margin-top: 0.12rem; }
+  .cv-links { color: var(--color-accent); }
+  .cv-lede { margin-top: 0.45rem; }
+
+  .cv-entry ul { margin-top: 0.45rem; padding-left: 1rem; }
+  .cv-entry li {
+    position: relative;
+    margin-bottom: 0.3rem;
+    list-style: none;
+    line-height: 1.45;
+  }
+  .cv-entry li::before {
+    content: '';
+    position: absolute;
+    left: -0.8rem;
+    top: 0.55em;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+
+  .cv-skill-row { display: flex; gap: 0.75rem; margin-bottom: 0.3rem; }
+  .cv-skill-row dt {
+    flex: 0 0 9.5rem;
+    font-size: 0.78rem;
+    color: var(--color-ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-top: 0.08rem;
+  }
+  .cv-skill-row dd { flex: 1; }
+
+  @media print {
+    @page { size: A4; margin: 13mm 14mm; }
+    html, body { background: #fff !important; }
+    .no-print { display: none !important; }
+    .cv { max-width: none; padding: 0; font-size: 9.4pt; }
+    .cv-head h1 { font-size: 20pt; }
+    .cv-section h2 { font-size: 7.4pt; }
+    .cv-entry h3 { font-size: 10.6pt; }
+    a { text-decoration: none; color: inherit; }
+    .cv-links { color: #7a4a2a !important; }
+  }
+</style>
