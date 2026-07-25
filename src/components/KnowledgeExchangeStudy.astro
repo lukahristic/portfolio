@@ -1,0 +1,292 @@
+---
+/*
+ * Case Study 03. The only project on the site built for other people.
+ *
+ * No repo, no demo, no screenshots — company systems, confidential client.
+ * The "what I can't show you" block is deliberately near the top rather than
+ * buried: the constraint is part of the story, not an apology for it.
+ *
+ * The architecture diagram is HTML boxes, not SVG. An SVG viewBox scales its
+ * text down with the canvas and becomes unreadable on a phone; boxes reflow.
+ * Zero JS either way.
+ */
+
+const surfaces = [
+  'Workflow documentation',
+  'Policies',
+  'Calibration updates',
+  'Reusable snippets',
+  'Internal tool directory',
+  'Error-sharing resources',
+];
+---
+
+<section id="knowledge-exchange" class="bg-paper-mid border-t border-paper-dark">
+  <div class="max-w-4xl mx-auto px-6 py-24">
+
+    <!-- Header -->
+    <div data-reveal class="flex items-center gap-4 mb-16">
+      <p class="font-body text-sm text-ink-muted uppercase tracking-widest">Case Study 03</p>
+      <span class="flex-1 border-t border-paper-dark"></span>
+      <span class="font-body text-xs text-ink-muted uppercase tracking-wider">Built for other people</span>
+    </div>
+
+    <h2 data-reveal class="font-display text-5xl md:text-6xl font-light text-ink mb-4" style="line-height: var(--leading-tight);">
+      Knowledge Exchange Platform
+    </h2>
+    <p data-reveal data-reveal-delay="1" class="font-display text-2xl font-light text-ink-muted mb-16" style="font-style: italic;">
+      Nobody asked me to build this. That's most of the point.
+    </p>
+
+    <!-- What I can't show you -->
+    <div
+      data-reveal
+      class="mb-16 border border-paper-dark rounded-lg overflow-hidden"
+      style="border-left-width: 3px; border-left-color: var(--color-accent);"
+    >
+      <div class="px-6 py-6">
+        <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">
+          What I can't show you
+        </p>
+        <p class="font-body text-base text-ink" style="line-height: var(--leading-normal);">
+          There's no repository, no screenshots, and no live link for this one. It was
+          built on company systems for a confidential client, so the code isn't mine to
+          publish and the contents aren't mine to show. Everything below is what I can
+          describe — the problem, the architecture, and the decisions.
+        </p>
+      </div>
+    </div>
+
+    <!-- The problem -->
+    <div data-reveal class="mb-16">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">The problem</p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        My job was reviewing developer applications. The knowledge needed to do that
+        well — policy updates, calibration decisions, workflow documentation, reusable
+        snippets, which internal tool did what — lived in a different place depending
+        on which one it was.
+      </p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        That was survivable if you'd been there a while. It was worse for the Training
+        team, who prepared new reviewers without reliable access to the latest
+        calibration decisions, review examples, or updated workflow references. Two
+        groups needed the same knowledge. Neither had one place to find it.
+      </p>
+
+      <div class="border-l-4 border-accent pl-6 py-1">
+        <p class="font-display text-2xl font-light text-ink" style="line-height: var(--leading-snug); font-style: italic;">
+          The gap wasn't information. It was that nobody owned keeping it together.
+        </p>
+      </div>
+    </div>
+
+    <!-- What I built -->
+    <div data-reveal class="mb-16">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">What I built</p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        A knowledge exchange built in Google Apps Script on top of Google Sheets. One
+        place to search what the team needed, read calibration updates, and share what
+        worked. Anyone could suggest a resource, and teammates could mark what had
+        actually helped — so useful material surfaced through use instead of through
+        someone ranking it.
+      </p>
+
+      <div class="flex flex-wrap gap-2">
+        {surfaces.map((s) => (
+          <span class="font-body text-xs text-ink-muted border border-paper-dark px-2 py-1 rounded">{s}</span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Architecture -->
+    <div data-reveal class="mb-16">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">How it was assembled</p>
+
+      <div class="ke-diagram">
+        <div class="ke-tier">
+          <p class="ke-tier-label">Contributors</p>
+          <div class="ke-boxes">
+            <span class="ke-box">SMEs</span>
+            <span class="ke-box">Team Leads</span>
+          </div>
+          <p class="ke-via">↓ &nbsp;via the admin portal — no engineering help needed</p>
+        </div>
+
+        <div class="ke-tier ke-tier--system">
+          <p class="ke-tier-label">The system</p>
+          <div class="ke-boxes">
+            <span class="ke-box ke-box--solid">Apps Script — application layer</span>
+            <span class="ke-box ke-box--solid">Google Sheets — data</span>
+          </div>
+        </div>
+
+        <div class="ke-tier">
+          <p class="ke-via">↓ &nbsp;search · calibration · tools · snippets · suggestions · surfacing</p>
+          <p class="ke-tier-label">Readers</p>
+          <div class="ke-boxes">
+            <span class="ke-box">Frontline reviewers</span>
+            <span class="ke-box">Training team</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="ke-aside">
+        <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-2">Build time only</p>
+        <p class="font-body text-sm text-ink-muted" style="line-height: var(--leading-normal);">
+          <strong class="text-ink">NotebookLM</strong> — never ran in production and was never
+          part of the system. It's where the thinking happened, not a component.
+        </p>
+      </div>
+    </div>
+
+    <!-- The decision -->
+    <div data-reveal class="mb-16">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">The decision that mattered most</p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        The obvious version of this is a system I maintain. I add the resources, I fix
+        the structure, I keep it current — and the moment I stop, it rots.
+      </p>
+
+      <p class="font-display text-4xl md:text-5xl font-light text-ink my-10" style="line-height: var(--leading-tight);">
+        I built it to work after I left.
+      </p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        So the platform got an admin portal. SMEs and Team Leads could add, edit, and
+        organise resources themselves — without me, and without needing anyone
+        technical. That was the design constraint, and it changed what I built.
+      </p>
+
+      <div class="border border-paper-dark rounded-lg px-6 py-5" style="background-color: var(--color-paper);">
+        <p class="font-body text-sm text-ink" style="line-height: var(--leading-normal);">
+          <strong>A tool that needs its author is a tool with an expiry date.</strong>
+          Most of the effort went into the boring half — the editing interface, the
+          structure, the permissions — because that's the half that decides whether
+          anything survives contact with a team.
+        </p>
+      </div>
+    </div>
+
+    <!-- NotebookLM -->
+    <div data-reveal class="mb-16">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">
+        NotebookLM as a development environment
+      </p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        I didn't use it as a chatbot. Project documentation, the Apps Script source, and
+        the sheet structures went in as sources. From that it could produce
+        implementation plans, suggest architecture changes against what already existed,
+        and hold versioned design notes across weeks of work — instead of answering
+        every question from nothing.
+      </p>
+
+      <p class="font-body text-lg text-ink" style="line-height: var(--leading-loose);">
+        Same habit as everything else I build: load the context first, then ask. The
+        quality of what comes back is mostly a function of what went in.
+      </p>
+    </div>
+
+    <!-- Second tool + handover -->
+    <div data-reveal class="mb-16">
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">And a smaller one</p>
+
+      <p class="font-body text-lg text-ink mb-10" style="line-height: var(--leading-loose);">
+        <strong>Review Annotation Generator.</strong> Writing annotations meant retyping
+        the same structures by hand. I built a generator that produced standardised
+        templates from the workflow requirements, so the format stopped being something
+        each reviewer re-derived every time.
+      </p>
+
+      <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-6">The handover</p>
+
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        On my last day I presented both tools to SMEs, Team Leads, and Managers — and
+        spent most of it on the method rather than the output. How to write a prompt
+        worth reusing. How to give a model explicit instructions so what comes back is
+        precise and honest instead of confidently wrong.
+      </p>
+
+      <p class="font-body text-lg text-ink" style="line-height: var(--leading-loose);">
+        The tools were the smaller half. The point was that the team could keep building
+        without me.
+      </p>
+    </div>
+
+    <!-- Stack + status -->
+    <div data-reveal class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pt-8 border-t border-paper-dark">
+      <div>
+        <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">Stack</p>
+        <div class="flex flex-wrap gap-2">
+          {["Google Apps Script", "Google Sheets", "NotebookLM", "Prompt engineering"].map((tech) => (
+            <span class="font-body text-xs text-ink-muted border border-paper-dark px-2 py-1 rounded">
+              {tech}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div class="text-right">
+        <span class="font-body text-xs text-ink-muted uppercase tracking-wider bg-paper-dark px-3 py-1 rounded-full">
+          Handed over
+        </span>
+        <p class="font-body text-xs text-ink-faint mt-2">Built at Accenture, 2026</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .ke-diagram {
+    border: 1px solid var(--color-paper-dark);
+    border-radius: 0.5rem;
+    background: var(--color-paper);
+    padding: 1.5rem;
+  }
+  .ke-tier + .ke-tier { margin-top: 1.25rem; }
+  .ke-tier--system {
+    border-top: 1px solid var(--color-paper-dark);
+    border-bottom: 1px solid var(--color-paper-dark);
+    padding: 1.25rem 0;
+  }
+  .ke-tier-label {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-ink-faint);
+    margin-bottom: 0.6rem;
+  }
+  .ke-boxes { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .ke-box {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--color-ink-muted);
+    border: 1px dashed var(--color-paper-dark);
+    border-radius: 0.375rem;
+    padding: 0.4rem 0.75rem;
+  }
+  .ke-box--solid {
+    border-style: solid;
+    border-color: var(--color-accent);
+    color: var(--color-ink);
+    background: var(--color-accent-faint);
+  }
+  .ke-via {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-ink-faint);
+    margin-top: 0.6rem;
+  }
+  .ke-tier .ke-via:first-child { margin-top: 0; margin-bottom: 0.6rem; }
+  .ke-aside {
+    margin-top: 0.75rem;
+    border: 1px dashed var(--color-paper-dark);
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+  }
+</style>
