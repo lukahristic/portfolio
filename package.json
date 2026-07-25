@@ -11,7 +11,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "resume": "node scripts/build-resume.mjs"
+    "resume": "node scripts/build-resume.mjs",
+    "og": "node scripts/build-og.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",

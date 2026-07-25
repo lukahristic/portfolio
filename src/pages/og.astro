@@ -1,0 +1,121 @@
+---
+/*
+ * Source for public/og-image.png. Regenerate with `npm run og`.
+ *
+ * Deliberately NOT wrapped in Layout: this needs an exact 1200x630 canvas with
+ * no nav, no site JS, and no reveal CSS (which hides elements until JS runs and
+ * would screenshot blank).
+ *
+ * Rendered at exactly 1200x630 — the Open Graph size. The old image was
+ * 1730x909 and 1.3MB of flat colour, which is why previews were slow to build.
+ *
+ * noindex: this is an asset source, not a page for people.
+ */
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>OG image source</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..500&family=DM+Sans:opsz,wght@9..40,400..500&display=swap"
+    />
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      html, body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+        background: #FAF7F2;
+      }
+
+      .card {
+        width: 1200px;
+        height: 630px;
+        padding: 76px 88px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* Same warm depth wash the hero uses, kept very low contrast. */
+        background:
+          radial-gradient(1100px 520px at 88% -8%, #F2DDD1 0%, rgba(242,221,209,0) 62%),
+          #FAF7F2;
+      }
+
+      .rule {
+        width: 64px;
+        height: 5px;
+        background: #C05C2C;
+        border-radius: 2px;
+      }
+
+      .name {
+        font-family: 'DM Sans', system-ui, sans-serif;
+        font-size: 21px;
+        font-weight: 500;
+        letter-spacing: 0.19em;
+        text-transform: uppercase;
+        color: #6B5E4E;
+        margin-top: 22px;
+      }
+
+      .headline {
+        font-family: 'Fraunces', Georgia, serif;
+        font-weight: 300;
+        font-size: 74px;
+        line-height: 1.08;
+        letter-spacing: -0.015em;
+        color: #1F1A14;
+        /* Fixed canvas, so the breaks are authored rather than left to wrapping. */
+      }
+
+      .sub {
+        font-family: 'DM Sans', system-ui, sans-serif;
+        font-size: 26px;
+        font-weight: 400;
+        line-height: 1.45;
+        color: #6B5E4E;
+        max-width: 46ch;
+        margin-top: 22px;
+      }
+
+      .foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-family: 'DM Sans', system-ui, sans-serif;
+        font-size: 20px;
+        color: #A89880;
+      }
+      .foot strong { color: #6B5E4E; font-weight: 500; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div>
+        <div class="rule"></div>
+        <p class="name">Wency Valentin</p>
+      </div>
+
+      <div>
+        <h1 class="headline">
+          Six years deciding<br />whether things<br />follow the rules.
+        </h1>
+        <p class="sub">
+          Now I build software where the rules are enforced by the database, not by a
+          policy document.
+        </p>
+      </div>
+
+      <div class="foot">
+        <span><strong>Product-minded full-stack developer</strong></span>
+        <span>Manila · Open to remote</span>
+      </div>
+    </div>
+  </body>
+</html>
