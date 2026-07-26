@@ -2,11 +2,17 @@
 
 This is a personal portfolio project. Read the context below before doing any work.
 
+> **Note for anyone reading this on GitHub:** `claude/project-memory.md` and
+> `docs/decision-log.md` are referenced below but deliberately not tracked in this
+> repo. They're internal working notes, kept local. The publishable half of the
+> decision log — the craft and engineering calls, with the alternatives they beat —
+> is on the site at `/decisions`.
+
 ## Read first, every session
-1. **`claude/project-memory.md`** — the compressed source of truth. Who this is, the locked strategy, brand, audience, creative direction, tech stack, and content architecture. Start here. It indexes everything else.
+1. **`claude/project-memory.md`** — the compressed source of truth. Who this is, the locked strategy, brand, audience, creative direction, tech stack, and content architecture. Start here. It indexes everything else. *(Local only — not in the repo.)*
 
 ## Deep references (read when a task touches that area)
-- **`docs/decision-log.md`** — every decision made, with its rejected alternatives and reasons. Check before reopening a settled question.
+- **`docs/decision-log.md`** — every decision made, with its rejected alternatives and reasons. Check before reopening a settled question. *(Local only — not in the repo.)*
 - **`docs/creative-direction.md`** — feeling, voice, color, type, art direction, motion rules.
 - **`docs/content-architecture.md`** — the section sequence and the purpose of each section.
 - **`docs/portfolio-sop.md`** — reusable workflows.

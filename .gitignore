@@ -27,3 +27,13 @@ pnpm-debug.log*
 
 # private session notes
 docs/update md sessions/
+
+# Internal project memory — kept local, never published.
+# This repo is public and the site footer links to it, so anything tracked here
+# is readable by anyone evaluating Wency. These two are written in the third
+# person and contain candid working notes about him; a hiring manager landing on
+# them would be reading a private assessment. The publishable half already
+# exists, rewritten in first person, at /decisions (src/data/decisions.ts).
+# See D-031.
+docs/decision-log.md
+claude/project-memory.md
