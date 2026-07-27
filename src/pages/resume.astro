@@ -24,9 +24,7 @@ const projects = [
       'Caught that the original status feature forced users to publicly declare their experience level — the exact anxiety the app exists to remove. Rebuilt it around mood, with willingness to talk as a separate opt-in toggle.',
       'Encoded safety at the database layer rather than in application code: blocks enforced by row-level security so blocked users return nothing, and the one-introduction limit as a UNIQUE constraint.',
       'Audited my own production schema and found permissive RLS policies granted to the anonymous role, exposing every gym’s roster and allowing forged check-ins. Rewrote policies across all affected tables.',
-      'Architected four coordinated systems: React Native app, Next.js admin portal with role-scoped views, marketing site, and a Supabase backend with Edge Functions and scheduled jobs.',
-      'Built GPS-verified check-in (proximity only, never stored), realtime presence, push notifications, automated checkout, and a scheduled data-retention policy.',
-      '226 commits. Currently in private beta and in conversations with gyms.',
+      'Architected four coordinated systems — React Native app, Next.js admin portal, marketing site, Supabase backend — with GPS-verified check-in, realtime presence, and push notifications. 226 commits, currently in private beta.',
     ],
   },
   {
@@ -38,8 +36,7 @@ const projects = [
       'A motorcycle parts store built as a deliberate exercise in assembling a real application correctly. Deployed, with demo accounts published in the repository.',
     bullets: [
       'Modelled vehicle fitment as a many-to-many relationship — Year/Make/Model resolving through a compatibility join table — so results only show parts that fit the selected bike.',
-      'Wrote authentication by hand rather than adopting a drop-in library: bcrypt hashing, JWT in HTTP-only cookies, and role-based middleware guarding admin routes and mutation endpoints.',
-      'Returned identical responses for wrong email and wrong password, so the login form cannot be used to enumerate registered accounts.',
+      'Wrote authentication by hand: bcrypt hashing, JWT in HTTP-only cookies, role-based middleware on admin routes, and identical error responses for wrong email vs. wrong password to prevent account enumeration.',
       'Ran containerised Postgres locally against managed Postgres in production from one Prisma schema, keeping environments honest.',
     ],
   },
@@ -51,11 +48,8 @@ const experience = [
     org: 'Accenture',
     dates: '2025 – 2026',
     bullets: [
-      'Review developer application submissions against platform policy, assessing risk indicators, policy violations, and submission accuracy to support approval and rejection decisions.',
-      'Identify unclear submissions and gaps in the policy itself, feeding quality improvement.',
-      'Apply consistent judgment to sensitive, high-impact content under strict confidentiality and data-protection standards.',
-      'Identified that knowledge was scattered between the review team and the trainers supporting it; designed and built a centralised knowledge platform in Google Apps Script and Sheets, covering workflow documentation, policies, calibration updates, and reusable snippets.',
-      'Built an admin portal so SMEs and Team Leads could maintain the platform without engineering support, keeping it current after my departure.',
+      'Review developer application submissions against platform policy — risk indicators, violations, submission accuracy — and the gaps in the policy itself, under strict confidentiality and data-protection standards.',
+      'Identified that review knowledge was scattered across the team and its trainers; built a centralised knowledge platform (Google Apps Script, Sheets) with an admin portal so SMEs and Team Leads could maintain it without engineering support.',
       'Built a review annotation generator producing standardised templates from workflow requirements, and presented both tools — and the NotebookLM-based method behind them — to SMEs, Team Leads, and Managers.',
     ],
   },
@@ -64,8 +58,7 @@ const experience = [
     org: 'Accenture',
     dates: '2020 – 2025',
     bullets: [
-      'Processed medical insurance claims and handled provider and customer appeals against client policy, contractual agreements, and regulatory guidelines.',
-      'Performed case analysis on medical documentation to identify discrepancies, coverage issues, and billing errors.',
+      'Processed medical insurance claims and provider/customer appeals against policy, contractual agreements, and regulatory guidelines — case analysis on medical documentation to identify discrepancies, coverage issues, and billing errors.',
       'Documented decisions to an audit-ready standard while meeting strict accuracy and productivity targets on high-volume workloads.',
     ],
   },
@@ -93,7 +86,7 @@ const skills = [
 
     <header class="cv-head">
       <h1>Wency Valentin</h1>
-      <p class="cv-title">Product-minded Full-Stack Developer</p>
+      <p class="cv-title">Full-Stack Developer</p>
       <p class="cv-contact">
         Manila, Philippines · Open to remote · Available immediately ·
         wency19valentin@gmail.com<br />
@@ -107,9 +100,9 @@ const skills = [
         Six years deciding whether things follow the rules — five on healthcare claims
         and appeals, the last reviewing developer applications against platform policy.
         I now build software where those rules are enforced by the database rather than
-        by a policy document. I plan before I build, read the documentation before I
-        implement, and treat AI output as a first draft that needs direction. Both
-        projects below are public; one is deployed with a login you can use.
+        a policy document, using AI tools deliberately and treating their output as a
+        first draft, not a finish line. Both projects below are public; one is deployed
+        with a login you can use.
       </p>
     </section>
 
@@ -158,14 +151,14 @@ const skills = [
 
     <section class="cv-section cv-skills">
       <h2>Technical skills</h2>
-      <dl>
-        {skills.map(([label, value]) => (
-          <div class="cv-skill-row">
-            <dt>{label}</dt>
-            <dd>{value}</dd>
-          </div>
+      <p class="cv-skills-text">
+        {skills.map(([label, value], i) => (
+          <>
+            <strong>{label}:</strong> {value}
+            {i < skills.length - 1 && <span class="cv-skills-sep"> · </span>}
+          </>
         ))}
-      </dl>
+      </p>
     </section>
 
   </main>
@@ -264,25 +257,34 @@ const skills = [
     background: var(--color-accent);
   }
 
-  .cv-skill-row { display: flex; gap: 0.75rem; margin-bottom: 0.3rem; }
-  .cv-skill-row dt {
-    flex: 0 0 9.5rem;
-    font-size: 0.78rem;
+  .cv-skills-text { line-height: 1.6; }
+  .cv-skills-text strong {
+    font-weight: 600;
     color: var(--color-ink-faint);
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    padding-top: 0.08rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
   }
-  .cv-skill-row dd { flex: 1; }
+  .cv-skills-sep { color: var(--color-ink-faint); }
 
   @media print {
-    @page { size: A4; margin: 13mm 14mm; }
+    @page { size: A4; margin: 8mm 11mm; }
     html, body { background: #fff !important; }
     .no-print { display: none !important; }
-    .cv { max-width: none; padding: 0; font-size: 9.4pt; }
-    .cv-head h1 { font-size: 20pt; }
-    .cv-section h2 { font-size: 7.4pt; }
-    .cv-entry h3 { font-size: 10.6pt; }
+    .cv { max-width: none; padding: 0; font-size: 9pt; }
+    .cv-head { margin-bottom: 0.5rem; }
+    .cv-head h1 { font-size: 18pt; }
+    .cv-title { margin-bottom: 0.3rem; }
+    .cv-contact { line-height: 1.35; }
+    .cv-section { margin-bottom: 0.48rem; }
+    .cv-section h2 { font-size: 7pt; margin-bottom: 0.3rem; }
+    .cv-summary { line-height: 1.35; }
+    .cv-entry { margin-bottom: 0.36rem; }
+    .cv-entry h3 { font-size: 10.2pt; }
+    .cv-lede { margin-top: 0.15rem; }
+    .cv-entry ul { margin-top: 0.15rem; }
+    .cv-entry li { margin-bottom: 0.04rem; line-height: 1.24; }
+    .cv-skills-text { line-height: 1.32; }
     a { text-decoration: none; color: inherit; }
     .cv-links { color: #7a4a2a !important; }
   }
