@@ -100,6 +100,16 @@ export const decisions: Decision[] = [
       'The conventional order — about, projects, skills, contact — which is organised around what the author wants to say rather than what the reader needs next.',
   },
   {
+    id: 'paused-not-launching',
+    area: 'Content',
+    title: 'Spottr says “paused,” and ships a sandbox instead of a promise',
+    decision:
+      'The status reads paused as a company, with a demo account and a test gym anyone can check into. The page says what happened and then hands over the keys.',
+    why: 'A reader can verify a running app in two minutes. They can never verify momentum. Building the sandbox — a gym row with no coordinates, so a stranger checks in from anywhere without landing in a real gym’s roster — was a smaller job than continuing to word around the question.',
+    rejected:
+      'Leaving the badge on “private beta — in gym conversations before store launch.” It was true when written and quietly expiring, and it asked for credit for the outcome I wanted rather than the one I got.',
+  },
+  {
     id: 'og-image-by-hand',
     area: 'Stack',
     title: 'The social preview image was made by hand',

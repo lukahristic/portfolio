@@ -4,6 +4,31 @@ import heroOld from '../assets/spottr/hero-old.jpg';
 import heroNew from '../assets/spottr/hero-new.jpg';
 import onboardingOld from '../assets/spottr/onboarding-old.jpg';
 import onboardingNew from '../assets/spottr/onboarding-new.jpg';
+
+const DEMO_URL = 'https://spottr-app-beta.vercel.app';
+const SITE_URL = 'https://spottrph.fit';
+const REPO_URL = 'https://github.com/lukahristic/spottr';
+const TESTING_URL = 'https://github.com/lukahristic/spottr/blob/main/TESTING.md';
+
+/* The sandbox gym. Real row in the database, no coordinates set on it, no real
+   members — so a stranger can run the whole flow without landing in a live
+   gym's roster. Kept here as a constant because it appears twice. */
+const GYM_CODE = 'ZVIU5';
+
+const steps = [
+  {
+    n: '01',
+    text: 'Create an account. Any email and password — there is no verification step in the way.',
+  },
+  {
+    n: '02',
+    text: 'On the empty "Your gyms" screen, tap Add gym manually and enter the code below. It is a sandbox gym with no coordinates set, so check-in works from anywhere.',
+  },
+  {
+    n: '03',
+    text: 'Pick a vibe, flip "Open to chat" on if you want, tap I\'m in. You are on the live list.',
+  },
+];
 ---
 {/* Spottr's "room": the shipped app's amber accent is scoped locally here,
     leaving the portfolio's terracotta as the house accent everywhere else. */}
@@ -27,6 +52,91 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
     <p data-reveal data-reveal-delay="1" class="font-display text-2xl font-light text-ink-muted mb-12" style="font-style: italic;">
       A gym app that gets out of its own way.
     </p>
+
+    {/*
+      Placed before the narrative on purpose. Everything below this box is an
+      argument about judgment; this box is the thing that makes the argument
+      checkable. Someone with four minutes should reach it first.
+    */}
+    <div
+      data-reveal
+      class="mb-16 border border-paper-dark rounded-lg overflow-hidden"
+      style="border-left-width: 3px; border-left-color: var(--color-accent);"
+    >
+      <div class="px-6 py-6">
+        <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-3">
+          You can check into it right now
+        </p>
+        <p class="font-body text-base text-ink mb-5" style="line-height: var(--leading-normal); max-width: 62ch;">
+          The real app, exported to run in a browser — same screens, same Postgres, same
+          realtime. No install. A sandbox gym is built into the database for exactly this,
+          so you can run the whole flow without appearing in a real gym's roster.
+        </p>
+
+        <div class="flex flex-wrap gap-x-6 gap-y-2 mb-6">
+          <a
+            href={DEMO_URL}
+            target="_blank"
+            rel="noopener"
+            class="font-body text-sm text-accent hover:text-accent-warm transition-colors"
+          >
+            Open the app →
+          </a>
+          <a
+            href={SITE_URL}
+            target="_blank"
+            rel="noopener"
+            class="font-body text-sm text-accent hover:text-accent-warm transition-colors"
+          >
+            The marketing site →
+          </a>
+        </div>
+
+        <div class="pt-5 border-t border-paper-dark">
+          <p class="font-body text-xs text-ink-faint uppercase tracking-widest mb-4">
+            Two minutes, any device
+          </p>
+
+          <ol class="mb-5" style="display: grid; gap: 0.75rem;">
+            {steps.map((s) => (
+              <li class="flex gap-4">
+                <span class="font-body text-xs text-ink-faint flex-shrink-0" style="padding-top: 0.2rem;">{s.n}</span>
+                <span class="font-body text-sm text-ink-muted" style="line-height: var(--leading-normal); max-width: 58ch;">
+                  {s.text}
+                </span>
+              </li>
+            ))}
+          </ol>
+
+          <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-4">
+            <span class="font-body text-xs text-ink-faint uppercase tracking-widest">Gym code</span>
+            <span
+              class="font-body text-sm text-ink bg-paper-dark px-2.5 py-1 rounded"
+              style="letter-spacing: 0.12em;"
+            >
+              {GYM_CODE}
+            </span>
+            <span class="font-body text-xs text-ink-faint">Spottr Test Gym</span>
+          </div>
+
+          <p class="font-body text-sm text-ink-muted" style="line-height: var(--leading-normal); max-width: 62ch;">
+            Alone in there, you get the empty state — which is the honest result, since
+            presence is the product. To watch check-in, presence and the one-message intro
+            work end to end, sign up as a second account in a private window and join with
+            the same code.
+            {' '}
+            <a
+              href={TESTING_URL}
+              target="_blank"
+              rel="noopener"
+              class="text-accent hover:text-accent-warm transition-colors"
+            >
+              The full testing guide →
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
 
     <!-- Sticky running head — pins below the title and tracks the current beat -->
     <div class="spottr-marker" aria-hidden="true">
@@ -78,11 +188,17 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
         and actually expecting contact. Context does the permission work — not profiles.
       </p>
 
-      <p class="font-body text-lg text-ink" style="line-height: var(--leading-loose);">
+      <p class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
         Spottr's solution: <strong>geolocation-gated live presence</strong> + <strong>chat-first contact</strong>.
         You only appear as "live" when you're physically checked in at the gym.
         Contact happens through the app — no approaching in person unless both people agree.
         The shared location and shared moment eliminate the awkwardness before it starts.
+      </p>
+
+      <p class="font-body text-lg text-ink" style="line-height: var(--leading-loose);">
+        GPS is the gate, but it is not the only door. Location fails indoors and people deny the
+        permission, so every gym has a code you can type instead. The check still means
+        "you are here" — a code is only printed on the wall of the room it lets you into.
       </p>
     </div>
 
@@ -150,13 +266,20 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
 
       <p data-reveal class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
         So I tore it out and rebuilt it around mood instead of role — Locked in, Finding my rhythm,
-        Taking it easy, In between sets. None of them rank you. They just say where your head is.
+        Taking it easy, Quick session, In between sets, Just showing up, or a line of your own.
+        None of them rank you. They just say where your head is.
+      </p>
+
+      <p data-reveal class="font-body text-lg text-ink mb-6" style="line-height: var(--leading-loose);">
+        Then willingness to connect became its own, separate thing: a single <strong>Open to chat</strong>
+        toggle. You can be locked in and still open to a hello, or taking it easy and left alone. Those
+        were never the same question — the first design had just fused them together.
       </p>
 
       <p data-reveal class="font-body text-lg text-ink mb-10" style="line-height: var(--leading-loose);">
-        Then willingness to connect became its own, separate thing: a single "welcome a hello" toggle.
-        You can be locked in and still open to a hello, or taking it easy and left alone. Those were
-        never the same question — the first design had just fused them together.
+        It is off by default and it resets to off every single check-in. Under the toggle, the app
+        says so: <em>"Resets every visit. Always your choice."</em> A consent setting that persists
+        quietly becomes a thing you agreed to months ago and forgot — so it expires when you leave.
       </p>
 
       <!-- The proof: the status system wipes into the mood + toggle rebuild -->
@@ -209,7 +332,7 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
           </button>
           <div class="card-expandable" id="arch-detail-mobile">
             <div class="card-inner">
-              <p class="font-body text-sm text-ink-faint px-5 pb-4" style="line-height: var(--leading-normal);">Auth, onboarding, live member list, messaging, QR check-in, push notifications</p>
+              <p class="font-body text-sm text-ink-faint px-5 pb-4" style="line-height: var(--leading-normal);">Auth, onboarding, live member list, messaging, QR and gym-code check-in, push notifications. The same source exports to the browser through react-native-web — which is the demo linked at the top of this page, not a separate build</p>
             </div>
           </div>
         </div>
@@ -254,11 +377,21 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
       <div data-reveal class="border-l-4 border-accent rounded-r-lg px-6 py-5" style="background-color: var(--color-accent-faint);">
         <p class="font-body text-xs text-accent uppercase tracking-widest mb-3">What makes it real</p>
         <p class="font-display text-lg font-light text-ink mb-4" style="line-height: var(--leading-snug);">The constraint is at the data layer.</p>
-        <p class="font-body text-sm text-ink" style="line-height: var(--leading-normal);">
+        <p class="font-body text-sm text-ink mb-4" style="line-height: var(--leading-normal);">
           Block relationships enforced by RLS — blocked users cannot see each other's check-ins,
           not because the app hides them, but because the database returns nothing.
-          The one-intro limit is a UNIQUE constraint on thread pairs, not an application rule.
-          Safety and integrity built in, not bolted on.
+          The one-intro limit is a UNIQUE constraint on thread pairs, held honest by a
+          <code class="text-ink-muted">CHECK (user_1 &lt; user_2)</code> that stores every pair in one
+          canonical order, so A→B and B→A are the same row and the second intro has nowhere to go.
+        </p>
+        <p class="font-body text-sm text-ink" style="line-height: var(--leading-normal);">
+          The consent rule took two passes. A trigger validated who you were and whether you were
+          blocked — but not whether the person you were messaging was actually open to chat, because
+          the app only ever drew that button for people who were. The rule was real in the interface
+          and absent from the database, so a direct API call could open a thread with anyone checked
+          in. It now checks both people are checked in at the same gym, that the recipient's
+          <code class="text-ink-muted">open_to_chat</code> is true, and that women-only check-ins are
+          reachable only by verified women — the same test the read policy already made.
         </p>
       </div>
     </div>
@@ -274,12 +407,12 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
           The whole thing is readable
         </p>
         <p class="font-body text-base text-ink mb-5" style="line-height: var(--leading-normal);">
-          226 commits across the app, the admin portal, the marketing site, and the
+          232 commits across the app, the admin portal, the marketing site, and the
           Supabase migrations — including the RLS policies and the security audit that
           rewrote them.
         </p>
         <a
-          href="https://github.com/lukahristic/spottr"
+          href={REPO_URL}
           target="_blank"
           rel="noopener"
           class="font-body text-sm text-accent hover:text-accent-warm transition-colors"
@@ -301,12 +434,13 @@ import onboardingNew from '../assets/spottr/onboarding-new.jpg';
           ))}
         </div>
       </div>
-      <div class="text-right">
+      <div class="sm:text-right">
         <span class="font-body text-xs text-accent uppercase tracking-wider bg-accent-faint px-3 py-1 rounded-full">
-          Private beta
+          Live demo
         </span>
-        <p class="font-body text-xs text-ink-faint mt-2">
-          Updated July 2026 — in gym conversations before store launch
+        <p class="font-body text-xs text-ink-faint mt-2" style="line-height: var(--leading-normal); max-width: 34ch;">
+          Ran a private beta at a real gym. Paused as a company — left deployed,
+          because a thing you can open beats a thing I describe.
         </p>
       </div>
     </div>

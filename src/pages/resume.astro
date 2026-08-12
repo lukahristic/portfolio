@@ -17,14 +17,14 @@ const projects = [
     name: 'Spottr',
     kind: 'Gym community app',
     stack: 'React Native · Expo · Supabase · PostgreSQL · Next.js',
-    links: ['github.com/lukahristic/spottr'],
+    links: ['spottr-app-beta.vercel.app', 'github.com/lukahristic/spottr'],
     lede:
       'A real-time social layer for gyms: co-present members signal openness and exchange one introductory message, solving the mutual hesitation that stops gym-goers connecting.',
     bullets: [
       'Caught that the original status feature forced users to publicly declare their experience level — the exact anxiety the app exists to remove. Rebuilt it around mood, with willingness to talk as a separate opt-in toggle.',
       'Encoded safety at the database layer rather than in application code: blocks enforced by row-level security so blocked users return nothing, and the one-introduction limit as a UNIQUE constraint.',
       'Audited my own production schema and found permissive RLS policies granted to the anonymous role, exposing every gym’s roster and allowing forged check-ins. Rewrote policies across all affected tables.',
-      'Architected four coordinated systems — React Native app, Next.js admin portal, marketing site, Supabase backend — with GPS-verified check-in, realtime presence, and push notifications. 226 commits, currently in private beta.',
+      'Architected four coordinated systems — React Native app, Next.js admin portal, marketing site, Supabase backend — with GPS-verified check-in, realtime presence, and push notifications. 232 commits; runs in a browser, no install.',
     ],
   },
   {
@@ -97,12 +97,13 @@ const skills = [
 
     <section class="cv-section">
       <p class="cv-summary">
-        Six years deciding whether things follow the rules — five on healthcare claims
-        and appeals, the last reviewing developer applications against platform policy.
-        I now build software where those rules are enforced by the database rather than
-        a policy document, using AI tools deliberately and treating their output as a
-        first draft, not a finish line. Both projects below are public; one is deployed
-        with a login you can use.
+        Six years at Accenture deciding whether things follow the rules — five on
+        healthcare claims and appeals, the last reviewing developer applications against
+        platform policy. I taught myself to build after hours, and now write that same
+        kind of rule into a database instead of a document. I use AI tools deliberately
+        and treat their output as a first draft, not a finish line. I am looking for an
+        entry-level engineering role where I can keep learning from people who have done
+        this longer.
       </p>
     </section>
 

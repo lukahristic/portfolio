@@ -76,7 +76,7 @@ const timeline: Node[] = [
     track: 'build',
     title: 'Spottr',
     detail:
-      'A gym app, and the first thing I built where the safety rules had to be real. 226 commits across a mobile app, an admin portal, a marketing site, and the migrations.',
+      'A gym app, and the first thing I built where the safety rules had to be real. 232 commits across a mobile app, an admin portal, a marketing site, and the migrations.',
     href: '/work/spottr',
     hrefLabel: 'Case study',
   },
@@ -117,11 +117,22 @@ const timeline: Node[] = [
     hrefLabel: 'Case study',
   },
   {
+    year: 'Jul 2026',
+    track: 'build',
+    title: 'Found a rule that only existed in the UI',
+    detail:
+      'Spottr let you message someone only if they were open to chat — enforced by the button the app drew, and by nothing in the database. A direct API call went around it. The check now lives in the trigger that creates the conversation.',
+    href: '/#consent-only-in-the-client',
+    hrefLabel: 'Write-up',
+  },
+  {
     year: 'Now',
     track: 'build',
-    title: 'Taking Spottr to gyms',
+    title: 'Paused Spottr, left it running',
     detail:
-      'Talking to gym owners and writing down what comes back. The product is built; whether it is wanted is a different question and I would rather find out from a person than from a dashboard.',
+      'The private beta happened at a real gym; I stopped pushing it as a company rather than keep building on a maybe. The app stays deployed with a sandbox gym anyone can check into, so what I actually made is testable instead of described.',
+    href: 'https://spottr-app-beta.vercel.app',
+    hrefLabel: 'Check in',
   },
 ];
 

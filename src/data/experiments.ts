@@ -67,6 +67,18 @@ export const experiments: Experiment[] = [
     featured: true,
   },
   {
+    id: 'consent-only-in-the-client',
+    title: 'The consent rule that only existed in the interface',
+    status: 'complete',
+    description:
+      'A Postgres trigger guarded thread creation — initiator identity, account status, block relationships — but never checked whether the recipient was open to chat. Nothing in the app could reach that gap, because the app only renders an intro button for members whose check-in says open_to_chat. A direct API call could open a thread with anyone checked in. The trigger now requires both parties to hold an active check-in at the same gym, the recipient\'s open_to_chat to be true, and women-only check-ins to be reachable only by verified women — mirroring the SELECT policy on check-ins that was already correct.',
+    tech: ['PostgreSQL', 'Triggers', 'Supabase RLS', 'Threat modelling'],
+    insight:
+      'A rule enforced by which button the client renders is not enforced. The read path already knew who was allowed to see whom; the write path was trusting the UI to have asked the same question. Where a policy exists on one side of a table and not the other, that asymmetry is the bug.',
+    date: '2026-07',
+    featured: false,
+  },
+  {
     id: 'photo-upload-debugging',
     title: 'Photo Upload: Three-Architecture Debug',
     status: 'complete',
